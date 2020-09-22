@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "u-anna",
+      "email": "anna@tf.com",
+      "initials": "AK",
+      "displayName": "Anna Kendrick",
+      "role": "pa"
+    },
+    {
+      "id": "u-pat",
+      "email": "pat@tf.com",
+      "initials": "PS",
+      "displayName": "Pat Sajak",
+      "role": "pm"
+    },
+    {
+      "id": "u-tom",
+      "email": "tom@tf.com",
+      "initials": "TC",
+      "displayName": "Tom Cruise",
+      "role": "trader"
+    }
+  ]
+}

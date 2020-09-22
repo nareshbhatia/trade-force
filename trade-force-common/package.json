@@ -1,0 +1,98 @@
+{
+  "name": "root",
+  "description": "Foundational components and utilities for Trade Force",
+  "private": true,
+  "author": "Naresh Bhatia",
+  "license": "MIT",
+  "homepage": "https://github.com/nareshbhatia/trade-force",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nareshbhatia/trade-force.git"
+  },
+  "keywords": [
+    "javascript",
+    "react",
+    "typescript"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "build-storybook": "build-storybook -o docs",
+    "cz-commit": "git-cz",
+    "del-dist": "lerna run --parallel del-dist",
+    "format": "lerna run format",
+    "lerna": "lerna",
+    "lint": "lerna run --parallel lint",
+    "prepublish": "lerna run prepublish",
+    "start": "lerna run start --stream --parallel",
+    "storybook": "start-storybook -p 6006",
+    "test": "lerna run test --"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "4.0.0-alpha.56",
+    "@react-force/core": "^3.3.1",
+    "@react-force/eslint-config": "^1.0.1",
+    "@storybook/addon-console": "^1.2.2",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/addons": "^6.0.21",
+    "@storybook/react": "^6.0.21",
+    "@testing-library/dom": "^7.24.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "12.1.6",
+    "@types/classnames": "^2.2.10",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "babel-eslint": "^10.1.0",
+    "classnames": "^2.2.6",
+    "commitizen": "^4.2.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-react-app": "^6.0.0-next.77",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "eslint-plugin-testing-library": "^3.9.0",
+    "husky": "^4.3.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "lerna": "^3.22.1",
+    "prettier": "^2.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "tsdx": "^0.14.0",
+    "typescript": "^4.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "subject-case": [
+        0
+      ]
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}

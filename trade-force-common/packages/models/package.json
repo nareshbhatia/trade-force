@@ -1,0 +1,40 @@
+{
+  "name": "@trade-force/models",
+  "description": "Domain models",
+  "version": "1.0.0",
+  "author": "Naresh Bhatia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nareshbhatia/trade-force.git",
+    "directory": "trade-force-common/packages/models"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "module": "dist/models.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsdx build --tsconfig tsconfig.build.json",
+    "build:local": "yarn lint && yarn test:coverage && yarn build",
+    "del-dist": "rimraf dist",
+    "format": "prettier --write '{src,test,stories}/**/*.ts*'",
+    "lint": "eslint '{src,test,stories}/**/*.ts*'",
+    "prepublish": "yarn build",
+    "start": "tsdx watch --tsconfig tsconfig.build.json --verbose --noClean",
+    "test": "echo No tests in this package",
+    "test:watch": "echo No tests in this package",
+    "test:coverage": "echo No tests in this package"
+  },
+  "dependencies": {
+    "tslib": "^2.0.1",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.0"
+  }
+}

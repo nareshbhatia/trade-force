@@ -1,0 +1,83 @@
+{
+  "name": "trade-force-client",
+  "description": "Trade Force client",
+  "version": "0.1.0",
+  "author": "Naresh Bhatia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nareshbhatia/trade-force.git",
+    "directory": "trade-force-client"
+  },
+  "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "format": "prettier --write README.md 'src/**/{*.md,*.json,*.ts*}'",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "4.0.0-alpha.56",
+    "@react-force/core": "^3.3.1",
+    "@react-force/date-utils": "^3.4.0",
+    "@react-force/formik-mui": "^3.1.0",
+    "@react-force/http-utils": "^1.2.0",
+    "@react-force/mock-data": "^1.1.0",
+    "@react-force/models": "^1.2.0",
+    "@react-force/number-utils": "^2.1.0",
+    "@react-force/utils": "^2.3.0",
+    "@react-force/web-utils": "^2.1.0",
+    "@trade-force/models": "^1.0.0",
+    "axios": "^0.20.0",
+    "classnames": "^2.2.6",
+    "mobx": "^5.15.7",
+    "mobx-react": "^6.3.0",
+    "mobx-state-router": "^5.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-query": "^2.23.0",
+    "react-query-devtools": "^2.5.0",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "^12.1.6",
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.2",
+    "@types/react": "16.9.49",
+    "@types/react-dom": "16.9.8",
+    "@types/yup": "^0.29.7",
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2",
+    "react-scripts": "3.4.3",
+    "source-map-explorer": "^2.5.0",
+    "typescript": "4.0.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
