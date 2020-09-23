@@ -10,8 +10,7 @@ export const UserRoleLookup: { [key in UserRole]: string } = {
 
 export interface User {
     id: UserId;
-    email: string;
-    initials: string;
     displayName: string;
+    initials: string;
     role: UserRole;
 }
