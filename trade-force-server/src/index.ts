@@ -17,11 +17,22 @@ import { createServer } from 'http';
 import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import TYPES from './constants/types';
+import './controllers/FundController';
+import './controllers/OrderController';
+import './controllers/SecurityController';
 import './controllers/UserController';
-import { UserService } from './services';
+import {
+    FundService,
+    OrderService,
+    SecurityService,
+    UserService,
+} from './services';
 
 // configure a new inversify container
 const container = new Container();
+container.bind<FundService>(TYPES.FundService).to(FundService);
+container.bind<OrderService>(TYPES.OrderService).to(OrderService);
+container.bind<SecurityService>(TYPES.SecurityService).to(SecurityService);
 container.bind<UserService>(TYPES.UserService).to(UserService);
 
 // register the container with an inversify server

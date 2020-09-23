@@ -1,0 +1,82 @@
+[
+  {
+    "id": "TFIDX",
+    "name": "Trade Force S&P 500 Index Fund",
+    "manager": "elvis.presley"
+  },
+  {
+    "id": "TFCOR",
+    "name": "Trade Force Core ETF",
+    "manager": "elvis.presley"
+  },
+  {
+    "id": "TFGOV",
+    "name": "Trade Force Government Fund",
+    "manager": "elvis.presley"
+  },
+  {
+    "id": "TFTSM",
+    "name": "Trade Force Total Stock Market Fund",
+    "manager": "elvis.presley"
+  },
+  {
+    "id": "TFGCR",
+    "name": "Trade Force Government Cash Reserves",
+    "manager": "stevie.wonder"
+  },
+  {
+    "id": "TFFMM",
+    "name": "Trade Force Federal Money Market Fund",
+    "manager": "stevie.wonder"
+  },
+  {
+    "id": "TFISF",
+    "name": "Trade Force Total International Stock Fund",
+    "manager": "stevie.wonder"
+  },
+  {
+    "id": "TFIIF",
+    "name": "Trade Force Institutional Index Fund",
+    "manager": "stevie.wonder"
+  },
+  {
+    "id": "TFLFF",
+    "name": "Trade Force Liquidity Federal Fund",
+    "manager": "aretha.franklin"
+  },
+  {
+    "id": "TFTBM",
+    "name": "Trade Force Total Bond Market Index Fund",
+    "manager": "aretha.franklin"
+  },
+  {
+    "id": "TFUSG",
+    "name": "Trade Force US Growth Fund",
+    "manager": "aretha.franklin"
+  },
+  {
+    "id": "TFCNF",
+    "name": "Trade Force Contrafund",
+    "manager": "aretha.franklin"
+  },
+  {
+    "id": "TFVFX",
+    "name": "Trade Force Value Fund",
+    "manager": "mariah.carey"
+  },
+  {
+    "id": "TFFSF",
+    "name": "Trade Force FS Fund",
+    "manager": "mariah.carey"
+  },
+  {
+    "id": "TFTCH",
+    "name": "Trade Force Technology Fund",
+    "manager": "mariah.carey"
+  },
+  {
+    "id": "TFENR",
+    "name": "Trade Force Energy Fund",
+    "manager": "mariah.carey"
+  }
+]
