@@ -31,7 +31,7 @@
     "@react-force/number-utils": "^2.1.0",
     "@react-force/utils": "^2.3.0",
     "@react-force/web-utils": "^2.1.0",
-    "@trade-force/models": "^1.0.0",
+    "@trade-force/models": "^1.0.1",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "mobx": "^5.15.7",

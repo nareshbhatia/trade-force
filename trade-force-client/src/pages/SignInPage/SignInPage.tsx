@@ -32,15 +32,15 @@ export const SignInPage = () => {
     const setMessage = useMessageSetter();
 
     const validationSchema = yup.object().shape({
-        email: yup.string().email().required(),
+        id: yup.string().required(),
     });
 
-    const handleSubmit = async (email: string) => {
+    const handleSubmit = async (id: string) => {
         try {
-            const user = users?.find((user) => user.email === email);
+            const user = users?.find((user) => user.id === id);
 
             if (user === undefined) {
-                setMessage(MessageFactory.error('Invalid Email'));
+                setMessage(MessageFactory.error('Invalid ID'));
                 return;
             }
 
@@ -68,18 +68,18 @@ export const SignInPage = () => {
                 <VerticalContainer>
                     <NarrowContainer textAlign="center">
                         <Formik
-                            initialValues={{ email: '' }}
+                            initialValues={{ id: '' }}
                             validationSchema={validationSchema}
                             onSubmit={async (values, actions) => {
-                                await handleSubmit(values.email);
+                                await handleSubmit(values.id);
                                 actions.setSubmitting(false);
                             }}
                         >
                             {() => (
                                 <Form className={classes.form}>
                                     <TextField
-                                        name="email"
-                                        label="Email"
+                                        name="id"
+                                        label="User ID"
                                         margin="normal"
                                         fullWidth
                                     />

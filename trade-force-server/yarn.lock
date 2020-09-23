@@ -36,10 +36,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@trade-force/models@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@trade-force/models/-/models-1.0.0.tgz#a8f5e3b4bebedb8358a9a591b76a853b56749d65"
-  integrity sha512-w9J0sihk2FkUqsNVxatsYWjDpyINGgPu97ZX3VLhKZvt3kN5x10utIvVEBZya7i0AeHIgUslbsRan5Ak1imt7A==
+"@trade-force/models@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@trade-force/models/-/models-1.0.1.tgz#c8f513ca14ddabbe6e608954f966418abfa46cfe"
+  integrity sha512-RD8YIgw+7xoN7RjMuwyMh+eJo8WLAI07OSelvjKH87YMbKFXzmIiPXMuRpEb0e6rvq8LxdYuctbivLovhhO/yQ==
   dependencies:
     tslib "^2.0.1"
     uuid "^8.3.0"
@@ -1313,10 +1313,15 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-mime-db@1.44.0, "mime-db@>= 1.43.0 < 2":
+mime-db@1.44.0:
   version "1.44.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.44.0.tgz#fa11c5eb0aca1334b4233cb4d52f10c5a6272f92"
   integrity sha512-/NOTfLrsPBVeH7YtFPgsVWveuL+4SjjYxaQ1xtM1KMFj7HdxlBlxeyNLzhyJVx7r4rZGJAZ/6lkKCitSc/Nmpg==
+
+"mime-db@>= 1.43.0 < 2":
+  version "1.45.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.45.0.tgz#cceeda21ccd7c3a745eba2decd55d4b73e7879ea"
+  integrity sha512-CkqLUxUk15hofLoLyljJSrukZi8mAtgd+yE5uO4tqRZsdsAJKv0O+rFMhVDRJgozy+yG6md5KwuXhD4ocIoP+w==
 
 mime-types@^2.1.12, mime-types@~2.1.19, mime-types@~2.1.24:
   version "2.1.27"

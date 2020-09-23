@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(1),
     },
     table: {
-        width: 440,
+        width: 460,
     },
 }));
 
@@ -34,16 +34,16 @@ export const SignInHelp = ({ users }: SignInHelpProps) => {
             <Table size="small" className={classes.table}>
                 <TableHead>
                     <TableRow>
+                        <TableCell>User ID</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Email</TableCell>
                         <TableCell>Role</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {users.map((user) => (
                         <TableRow key={user.id} hover>
+                            <TableCell>{user.id}</TableCell>
                             <TableCell>{user.displayName}</TableCell>
-                            <TableCell>{user.email}</TableCell>
                             <TableCell>{UserRoleLookup[user.role]}</TableCell>
                         </TableRow>
                     ))}

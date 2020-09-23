@@ -1,5 +1,5 @@
 {
-  "users": [
+  "managers": [
     {
       "id": "elvis.presley",
       "displayName": "Elvis Presley",
@@ -23,7 +23,9 @@
       "displayName": "Mariah Carey",
       "initials": "MC",
       "role": "pm"
-    },
+    }
+  ],
+  "analysts": [
     {
       "id": "paul.mccartney",
       "displayName": "Paul McCartney",
@@ -47,7 +49,9 @@
       "displayName": "Karen Carpenter",
       "initials": "KC",
       "role": "pa"
-    },
+    }
+  ],
+  "traders": [
     {
       "id": "tom.cruise",
       "displayName": "Tom Cruise",

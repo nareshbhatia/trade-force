@@ -12,8 +12,10 @@ async function fetchUsers(url: string): Promise<Array<User>> {
     const resp = await axios.get(url);
     const users: Array<User> = resp.data;
 
-    // Sort by display name
+    // Sort by role then display name
     users.sort((a, b) => {
+        if (a.role < b.role) return -1;
+        if (a.role > b.role) return 1;
         if (a.displayName < b.displayName) return -1;
         if (a.displayName > b.displayName) return 1;
         return 0;
