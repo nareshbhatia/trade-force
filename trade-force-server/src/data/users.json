@@ -1,0 +1,74 @@
+[
+  {
+    "id": "elvis.presley",
+    "displayName": "Elvis Presley",
+    "initials": "EP",
+    "role": "pm"
+  },
+  {
+    "id": "stevie.wonder",
+    "displayName": "Stevie Wonder",
+    "initials": "SW",
+    "role": "pm"
+  },
+  {
+    "id": "aretha.franklin",
+    "displayName": "Aretha Franklin",
+    "initials": "AF",
+    "role": "pm"
+  },
+  {
+    "id": "mariah.carey",
+    "displayName": "Mariah Carey",
+    "initials": "MC",
+    "role": "pm"
+  },
+  {
+    "id": "paul.mccartney",
+    "displayName": "Paul McCartney",
+    "initials": "PM",
+    "role": "pa"
+  },
+  {
+    "id": "tina.turner",
+    "displayName": "Tina Turner",
+    "initials": "TT",
+    "role": "pa"
+  },
+  {
+    "id": "michael.jackson",
+    "displayName": "Michael Jackson",
+    "initials": "MJ",
+    "role": "pa"
+  },
+  {
+    "id": "karen.carpenter",
+    "displayName": "Karen Carpenter",
+    "initials": "KC",
+    "role": "pa"
+  },
+  {
+    "id": "tom.cruise",
+    "displayName": "Tom Cruise",
+    "initials": "TC",
+    "role": "trader"
+  },
+  {
+    "id": "whitney.houston",
+    "displayName": "Whitney Houston",
+    "initials": "WH",
+    "role": "trader"
+  },
+  {
+    "id": "john.lennon",
+    "displayName": "John Lennon",
+    "initials": "JL",
+    "role": "trader"
+  },
+  {
+    "id": "celine.dion",
+    "displayName": "Celine Dion",
+    "initials": "CD",
+    "role": "trader"
+  }
+]

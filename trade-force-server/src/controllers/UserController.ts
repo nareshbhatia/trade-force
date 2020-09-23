@@ -9,9 +9,7 @@ export class UserController {
     constructor(@inject(TYPES.UserService) private userService: UserService) {}
 
     @httpGet('/')
-    public async getUsers(
-        @queryParam('email') email: string
-    ): Promise<Array<User>> {
-        return await this.userService.getUsers(email);
+    public async getUsers(): Promise<Array<User>> {
+        return await this.userService.getUsers();
     }
 }

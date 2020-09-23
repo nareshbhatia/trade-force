@@ -1,4 +1,5 @@
 const TAGS = {
+    OrderController: 'OrderController',
     UserController: 'UserController',
 };
 
