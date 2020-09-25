@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     username: {
         marginRight: theme.spacing(1),
     },
+    toolbar: {
+        color: theme.palette.text.secondary,
+    },
 }));
 
 export interface HeaderProps {
@@ -22,7 +25,7 @@ export const Header = ({ user }: HeaderProps) => {
 
     return (
         <AppBar color="transparent" elevation={0} position="static">
-            <Toolbar>
+            <Toolbar className={classes.toolbar}>
                 <HeaderTitle>Trade Force</HeaderTitle>
                 {user !== undefined ? (
                     <Typography className={classes.username}>

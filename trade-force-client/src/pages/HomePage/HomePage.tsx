@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import {
     HorizontalContainer,
@@ -13,6 +13,12 @@ export const HomePage = () => {
     const { authStore } = rootStore;
     const user = authStore.user;
 
+    const [isOrderTicketOpen, setOrderTicketOpen] = useState(true);
+
+    const handleOrderTicketClose = () => {
+        setOrderTicketOpen(false);
+    };
+
     return (
         <ViewVerticalContainer>
             <Header user={user} />
@@ -20,10 +26,14 @@ export const HomePage = () => {
                 <VerticalContainer flex={1}>
                     <Orders />
                 </VerticalContainer>
-                <Divider orientation="vertical" flexItem />
-                <VerticalContainer flex="0 0 256px">
-                    <OrderTicket />
-                </VerticalContainer>
+                {isOrderTicketOpen ? (
+                    <Fragment>
+                        <Divider orientation="vertical" flexItem />
+                        <VerticalContainer flex="0 0 256px">
+                            <OrderTicket onClose={handleOrderTicketClose} />
+                        </VerticalContainer>
+                    </Fragment>
+                ) : null}
             </HorizontalContainer>
         </ViewVerticalContainer>
     );

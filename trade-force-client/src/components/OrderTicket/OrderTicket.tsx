@@ -27,7 +27,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export const OrderTicket = () => {
+export interface OrderTicketProps {
+    onClose: () => void;
+}
+
+export const OrderTicket = ({ onClose }: OrderTicketProps) => {
     const classes = useStyles();
     const order = newOrder('buy');
     const { side } = order;
@@ -45,7 +49,9 @@ export const OrderTicket = () => {
 
     return (
         <VerticalContainer>
-            <PanelHeader>Order Ticket</PanelHeader>
+            <PanelHeader showCloseButton onClose={onClose}>
+                Order Ticket
+            </PanelHeader>
             <VerticalContainer px={2} py={1} className={ticketClass}>
                 <h1 className={titleClass}>{title}</h1>
                 <OrderForm order={order} onSave={handleSave} />
