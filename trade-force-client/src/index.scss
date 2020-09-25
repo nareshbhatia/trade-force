@@ -8,6 +8,8 @@ $error-main: #D90000;
 $background-panel: #383838;
 $background-content: #404040;
 $text-muted: #808080;
+$text-normal: #D9D9D9;
+$text-emphasis: #FFFFFF;
 
 // Custom colors for grid
 $border-grid: #474747;
@@ -18,7 +20,9 @@ $border-row: #2B2B2B;
         (
             // Grid
             font-family: ("Roboto", sans-serif),
+            font-size: 14px,
             background-color: $background-content,
+            foreground-color: $text-normal,
             borders: false,
             borders-critical: true,
             border-color: $border-grid,

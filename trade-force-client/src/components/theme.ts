@@ -8,6 +8,8 @@ declare module '@material-ui/core/styles/createPalette' {
 
     interface TypeText {
         muted: string;
+        normal: string;
+        emphasis: string;
     }
 
     interface Palette {
@@ -54,6 +56,8 @@ const createTheme = () => {
         },
         text: {
             muted: '#808080',
+            normal: '#D9D9D9',
+            emphasis: '#FFFFFF',
         },
         business: {
             buyBackground: '#2C4C3D',

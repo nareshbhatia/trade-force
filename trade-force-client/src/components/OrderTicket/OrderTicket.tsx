@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
-import { newOrder, Order } from '@trade-force/models';
+import { newOrder, Order, OrderSideLookup } from '@trade-force/models';
 import classNames from 'classnames';
 import { PanelHeader } from '../PanelHeader';
 import { OrderForm } from './OrderForm';
@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     sellTicket: {
         backgroundColor: theme.palette.business.sellBackground,
     },
-    buyTitle: {
+    buyText: {
         color: theme.palette.business.buyText,
     },
-    sellTitle: {
+    sellText: {
         color: theme.palette.business.sellText,
     },
 }));
@@ -36,9 +36,9 @@ export const OrderTicket = () => {
     const ticketClass = side === 'buy' ? classes.buyTicket : classes.sellTicket;
     const titleClass = classNames(
         classes.title,
-        side === 'buy' ? classes.buyTitle : classes.sellTitle
+        side === 'buy' ? classes.buyText : classes.sellText
     );
-    const title = side === 'buy' ? 'Buy' : 'Sell';
+    const title = OrderSideLookup[order.side];
 
     const handleSave = async (order: Order) => {
         console.log(order);
