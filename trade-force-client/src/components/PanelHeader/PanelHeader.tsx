@@ -3,17 +3,23 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
-        minHeight: 68,
+        height: 100,
         padding: theme.spacing(1),
-        backgroundColor: theme.palette.background.bg3,
-        color: theme.palette.text.text3,
-        fontSize: 20,
+        backgroundColor: theme.palette.background.panel,
+        color: theme.palette.text.muted,
+        fontFamily: 'Source Sans Pro',
+        fontSize: 30,
         fontWeight: theme.typography.fontWeightLight,
     },
 }));
 
-export const PanelHeader: React.FC = ({ children }) => {
+export interface PanelHeaderProps {
+    children: React.ReactNode;
+    className?: string;
+}
+
+export const PanelHeader = ({ children, className }: PanelHeaderProps) => {
     const classes = useStyles();
 
-    return <div className={classes.root}>{children}</div>;
+    return <div className={`${className} ${classes.root}`}>{children}</div>;
 };

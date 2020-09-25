@@ -1,0 +1,40 @@
+@import '../node_modules/ag-grid-community/src/styles/ag-grid.scss';
+@import '../node_modules/ag-grid-community/src/styles/ag-theme-alpine-dark/sass/ag-theme-alpine-dark-mixin.scss';
+
+// Colors from Material-UI palette
+$primary-main: #25617F;
+$secondary-main: #F2D200;
+$error-main: #D90000;
+$background-panel: #383838;
+$background-content: #404040;
+$text-muted: #808080;
+
+// Custom colors for grid
+$border-grid: #474747;
+$border-row: #2B2B2B;
+
+.ag-theme-alpine-dark {
+    @include ag-theme-alpine-dark(
+        (
+            // Grid
+            font-family: ("Roboto", sans-serif),
+            background-color: $background-content,
+            borders: false,
+            borders-critical: true,
+            border-color: $border-grid,
+            alpine-active-color: $primary-main,
+
+            // Header
+            header-background-color: $background-panel,
+            header-foreground-color: $text-muted,
+
+            // Rows
+            row-border-color: $border-row,
+            odd-row-background-color: null,
+        )
+    );
+
+    .ag-header-row {
+        font-weight: 500;
+    }
+}

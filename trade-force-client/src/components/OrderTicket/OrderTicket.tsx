@@ -8,7 +8,7 @@ import { OrderForm } from './OrderForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
     title: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: theme.typography.fontWeightMedium,
         margin: 0,
         marginBottom: theme.spacing(1) * 1.5,
@@ -47,7 +47,7 @@ export const OrderTicket = () => {
     return (
         <VerticalContainer>
             <PanelHeader>Order Ticket</PanelHeader>
-            <VerticalContainer p={1} className={ticketClass}>
+            <VerticalContainer px={2} py={1} className={ticketClass}>
                 <h1 className={titleClass}>{title}</h1>
                 <OrderForm order={order} onSave={handleSave} />
             </VerticalContainer>

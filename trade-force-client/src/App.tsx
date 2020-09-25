@@ -14,7 +14,6 @@ import { theme } from './components';
 import { RootStoreContext } from './contexts';
 import { initApp } from './init';
 import { viewMap } from './viewMap';
-import './App.scss';
 
 // Initialize the app
 const rootStore = initApp();

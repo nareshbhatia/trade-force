@@ -21,7 +21,7 @@ export const HomePage = () => {
                     <Orders />
                 </VerticalContainer>
                 <Divider orientation="vertical" flexItem />
-                <VerticalContainer flex="0 0 170px">
+                <VerticalContainer flex="0 0 256px">
                     <OrderTicket />
                 </VerticalContainer>
             </HorizontalContainer>

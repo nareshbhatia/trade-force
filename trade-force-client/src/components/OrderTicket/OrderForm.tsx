@@ -1,14 +1,24 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { FormActions, TextField } from '@react-force/formik-mui';
+import { TextField } from '@react-force/formik-mui';
 import { Order } from '@trade-force/models';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { ActionButton } from '../ActionButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
+    },
+    actionBar: {
+        marginTop: theme.spacing(1),
+        display: 'flex',
+        alignItems: 'center',
+        flex: '0 0 auto',
+        '& > :not(:first-child)': {
+            marginLeft: theme.spacing(1),
+        },
     },
 }));
 
@@ -95,7 +105,13 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         InputLabelProps={{ shrink: true }}
                     />
 
-                    <FormActions submitLabel="Save" />
+                    <div className={classes.actionBar}>
+                        <ActionButton
+                            color={order.side === 'buy' ? 'buy' : 'sell'}
+                        >
+                            Submit
+                        </ActionButton>
+                    </div>
                 </Form>
             )}
         </Formik>

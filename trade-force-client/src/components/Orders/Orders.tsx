@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
+import { ColumnApi, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import classNames from 'classnames';
 import { useOrders } from '../../hooks';
 import { PanelHeader } from '../PanelHeader';
-import 'ag-grid-enterprise';
+// import 'ag-grid-enterprise';
+
+const useStyles = makeStyles((theme: Theme) => ({
+    panelHeader: {
+        height: 52,
+    },
+    grid: {
+        height: '100%',
+        width: '100%',
+    },
+}));
 
 export const Orders = () => {
-    const [gridApi, setGridApi] = useState(null);
-    const [gridColumnApi, setGridColumnApi] = useState(null);
+    const classes = useStyles();
+    const [gridApi, setGridApi] = useState<GridApi | undefined>();
+    const [gridColumnApi, setGridColumnApi] = useState<ColumnApi | undefined>();
 
     const { isLoading, isError, data: orders, error } = useOrders();
+
+    const handleGridReady = (event: GridReadyEvent) => {
+        setGridApi(event.api);
+        setGridColumnApi(event.columnApi);
+    };
+    const handleRowSelected = () => {};
 
     // Allow ErrorBoundary to handle errors
     if (isError) {
@@ -22,35 +42,53 @@ export const Orders = () => {
 
     return (
         <VerticalContainer>
-            <PanelHeader>Orders</PanelHeader>
-            <div
-                className="ag-theme-alpine-dark"
-                style={{ height: 400, width: 600 }}
-            >
-                <AgGridReact rowData={orders}>
-                    <AgGridColumn field="side" sortable={true} filter={true} />
-                    <AgGridColumn field="secId" sortable={true} filter={true} />
+            <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
+            <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
+                <AgGridReact
+                    onGridReady={handleGridReady}
+                    onRowSelected={handleRowSelected}
+                    rowData={orders}
+                    defaultColDef={{
+                        resizable: true,
+                        sortable: true,
+                        filter: true,
+                    }}
+                >
+                    <AgGridColumn field="side" width={80} />
+                    <AgGridColumn
+                        field="secId"
+                        headerName="Symbol"
+                        width={100}
+                    />
+                    <AgGridColumn field="secId" headerName="Name" width={150} />
                     <AgGridColumn
                         field="quantity"
-                        sortable={true}
-                        filter={true}
+                        headerName="Qty"
+                        width={90}
                     />
                     <AgGridColumn
                         field="executed"
-                        sortable={true}
-                        filter={true}
+                        headerName="Exec"
+                        width={90}
                     />
-                    <AgGridColumn field="type" sortable={true} filter={true} />
-                    <AgGridColumn
-                        field="status"
-                        sortable={true}
-                        filter={true}
-                    />
+                    <AgGridColumn field="type" width={100} />
+                    <AgGridColumn field="status" width={150} />
                     <AgGridColumn
                         field="fundId"
-                        sortable={true}
-                        filter={true}
+                        headerName="Fund"
+                        width={100}
                     />
+                    <AgGridColumn
+                        field="managerId"
+                        headerName="PM"
+                        width={80}
+                    />
+                    <AgGridColumn
+                        field="analystId"
+                        headerName="AN"
+                        width={80}
+                    />
+                    <AgGridColumn field="traderId" headerName="TR" width={80} />
                 </AgGridReact>
             </div>
         </VerticalContainer>

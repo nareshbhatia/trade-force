@@ -1,17 +1,13 @@
 import { createMuiTheme, PaletteType } from '@material-ui/core';
-import red from '@material-ui/core/colors/red';
 
 declare module '@material-ui/core/styles/createPalette' {
     interface TypeBackground {
-        bg1: string;
-        bg2: string;
-        bg3: string;
+        panel: string;
+        content: string;
     }
 
     interface TypeText {
-        text1: string;
-        text2: string;
-        text3: string;
+        muted: string;
     }
 
     interface Palette {
@@ -20,6 +16,8 @@ declare module '@material-ui/core/styles/createPalette' {
             sellBackground: string;
             buyAction: string;
             sellAction: string;
+            buyActionAlt: string;
+            sellActionAlt: string;
             buyText: string;
             sellText: string;
         };
@@ -31,6 +29,8 @@ declare module '@material-ui/core/styles/createPalette' {
             sellBackground: string;
             buyAction: string;
             sellAction: string;
+            buyActionAlt: string;
+            sellActionAlt: string;
             buyText: string;
             sellText: string;
         };
@@ -40,31 +40,30 @@ declare module '@material-ui/core/styles/createPalette' {
 const createTheme = () => {
     const palette = {
         primary: {
-            main: '#215674',
+            main: '#25617F',
         },
         secondary: {
-            main: '#F0CC00',
+            main: '#F2D200',
         },
         error: {
-            main: red.A400,
+            main: '#D90000',
         },
         background: {
-            bg1: '#008080',
-            bg2: '#000000',
-            bg3: '#383838',
+            panel: '#383838',
+            content: '#404040',
         },
         text: {
-            text1: '#000000',
-            text2: '#000000',
-            text3: '#808080',
+            muted: '#808080',
         },
         business: {
-            buyBackground: '#2c4d3d',
-            sellBackground: '#4d3e2e',
+            buyBackground: '#2C4C3D',
+            sellBackground: '#4C3E2E',
             buyAction: '#004734',
-            sellAction: '#7a2f18',
-            buyText: '#80b79d',
-            sellText: '#e57a00',
+            sellAction: '#7A2F18',
+            buyActionAlt: '#4D896D',
+            sellActionAlt: '#B35F00',
+            buyText: '#009951',
+            sellText: '#E57A00',
         },
         type: 'dark' as PaletteType,
     };

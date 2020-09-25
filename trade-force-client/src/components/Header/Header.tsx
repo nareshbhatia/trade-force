@@ -22,7 +22,7 @@ export const Header = ({ user }: HeaderProps) => {
 
     return (
         <AppBar color="transparent" elevation={0} position="static">
-            <Toolbar variant="dense">
+            <Toolbar>
                 <HeaderTitle>Trade Force</HeaderTitle>
                 {user !== undefined ? (
                     <Typography className={classes.username}>
