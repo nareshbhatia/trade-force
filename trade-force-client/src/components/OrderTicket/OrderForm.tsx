@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         flexDirection: 'column',
     },
     actionBar: {
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(1) * 1.5,
         display: 'flex',
         alignItems: 'center',
         flex: '0 0 auto',
@@ -52,7 +52,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         name="secId"
                         label="Symbol"
                         variant="outlined"
-                        margin="dense"
+                        margin="normal"
                         size="small"
                         fullWidth
                         InputLabelProps={{ shrink: true }}
@@ -61,7 +61,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         name="quantity"
                         label="Quantity"
                         variant="outlined"
-                        margin="dense"
+                        margin="normal"
                         size="small"
                         fullWidth
                         InputLabelProps={{ shrink: true }}
@@ -70,7 +70,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         name="type"
                         label="Order Type"
                         variant="outlined"
-                        margin="dense"
+                        margin="normal"
                         size="small"
                         fullWidth
                         InputLabelProps={{ shrink: true }}
@@ -79,7 +79,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         name="limitPrice"
                         label="Limit Price"
                         variant="outlined"
-                        margin="dense"
+                        margin="normal"
                         size="small"
                         fullWidth
                         InputLabelProps={{ shrink: true }}
@@ -88,7 +88,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         name="fundId"
                         label="Fund"
                         variant="outlined"
-                        margin="dense"
+                        margin="normal"
                         size="small"
                         fullWidth
                         InputLabelProps={{ shrink: true }}
@@ -97,7 +97,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         name="note"
                         label="Note"
                         variant="outlined"
-                        margin="dense"
+                        margin="normal"
                         size="small"
                         fullWidth
                         multiline

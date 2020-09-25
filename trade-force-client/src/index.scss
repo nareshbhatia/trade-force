@@ -38,7 +38,16 @@ $border-row: #2B2B2B;
         )
     );
 
+    .ag-cell {
+        display: flex;
+        align-items: center;
+    }
+
     .ag-header-row {
         font-weight: 500;
+    }
+
+    .ag-row-selected {
+        background-color: $primary-main;
     }
 }

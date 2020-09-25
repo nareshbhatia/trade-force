@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         fontSize: 24,
         fontWeight: theme.typography.fontWeightMedium,
         margin: 0,
-        marginBottom: theme.spacing(1) * 1.5,
         textTransform: 'uppercase',
     },
     buyTicket: {

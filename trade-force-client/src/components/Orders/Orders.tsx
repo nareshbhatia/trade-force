@@ -14,6 +14,7 @@ import {
     ColumnApi,
     GridApi,
     GridReadyEvent,
+    RowSelectedEvent,
     ValueGetterParams,
 } from 'ag-grid-community';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     side: {
         color: theme.palette.text.emphasis,
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: theme.typography.fontWeightBold,
         textTransform: 'uppercase',
     },
@@ -76,7 +77,11 @@ export const Orders = () => {
         setGridColumnApi(event.columnApi);
     };
 
-    const handleRowSelected = () => {};
+    const handleRowSelected = (event: RowSelectedEvent) => {
+        if (event.node.isSelected()) {
+            console.log(event.node.data.secId);
+        }
+    };
 
     const sideCellClass = (params: CellClassParams) => {
         return [
@@ -143,14 +148,19 @@ export const Orders = () => {
             <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
             <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
                 <AgGridReact
-                    onGridReady={handleGridReady}
-                    onRowSelected={handleRowSelected}
                     rowData={orders}
+                    rowSelection={'single'}
                     defaultColDef={{
                         resizable: true,
                         sortable: true,
                         filter: true,
                     }}
+                    gridOptions={{
+                        rowHeight: 36,
+                        suppressCellSelection: true,
+                    }}
+                    onGridReady={handleGridReady}
+                    onRowSelected={handleRowSelected}
                 >
                     <AgGridColumn
                         field="side"

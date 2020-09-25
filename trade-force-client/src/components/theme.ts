@@ -18,10 +18,12 @@ declare module '@material-ui/core/styles/createPalette' {
             sellBackground: string;
             buyAction: string;
             sellAction: string;
-            buyActionAlt: string;
-            sellActionAlt: string;
+            buyActionForm: string;
+            sellActionForm: string;
             buyText: string;
             sellText: string;
+            buyLegend: string;
+            sellLegend: string;
         };
     }
 
@@ -31,10 +33,12 @@ declare module '@material-ui/core/styles/createPalette' {
             sellBackground: string;
             buyAction: string;
             sellAction: string;
-            buyActionAlt: string;
-            sellActionAlt: string;
+            buyActionForm: string;
+            sellActionForm: string;
             buyText: string;
             sellText: string;
+            buyLegend: string;
+            sellLegend: string;
         };
     }
 }
@@ -64,10 +68,12 @@ const createTheme = () => {
             sellBackground: '#4C3E2E',
             buyAction: '#004734',
             sellAction: '#7A2F18',
-            buyActionAlt: '#4D896D',
-            sellActionAlt: '#B35F00',
-            buyText: '#009951',
+            buyActionForm: '#4D896D',
+            sellActionForm: '#B35F00',
+            buyText: '#80B79D',
             sellText: '#E57A00',
+            buyLegend: '#66A989',
+            sellLegend: '#FCAF17',
         },
         type: 'dark' as PaletteType,
     };
