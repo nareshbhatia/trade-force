@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import Divider from '@material-ui/core/Divider';
 import {
     HorizontalContainer,
@@ -6,18 +6,14 @@ import {
     ViewVerticalContainer,
 } from '@react-force/core';
 import { Header, Orders, OrderTicket } from '../../components';
-import { useRootStore } from '../../contexts';
+import { useRootStore, useUiState } from '../../contexts';
 
 export const HomePage = () => {
     const rootStore = useRootStore();
     const { authStore } = rootStore;
     const user = authStore.user;
 
-    const [isOrderTicketOpen, setOrderTicketOpen] = useState(true);
-
-    const handleOrderTicketClose = () => {
-        setOrderTicketOpen(false);
-    };
+    const { isOrderTicketOpen } = useUiState();
 
     return (
         <ViewVerticalContainer>
@@ -30,7 +26,7 @@ export const HomePage = () => {
                     <Fragment>
                         <Divider orientation="vertical" flexItem />
                         <VerticalContainer flex="0 0 256px">
-                            <OrderTicket onClose={handleOrderTicketClose} />
+                            <OrderTicket />
                         </VerticalContainer>
                     </Fragment>
                 ) : null}

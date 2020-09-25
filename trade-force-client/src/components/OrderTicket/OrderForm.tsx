@@ -107,7 +107,11 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
 
                     <div className={classes.actionBar}>
                         <ActionButton
-                            color={order.side === 'buy' ? 'buy' : 'sell'}
+                            customAction={
+                                order.side === 'buy'
+                                    ? 'buyInForm'
+                                    : 'sellInForm'
+                            }
                         >
                             Submit
                         </ActionButton>

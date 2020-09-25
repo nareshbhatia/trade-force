@@ -78,7 +78,13 @@ const createTheme = () => {
         type: 'dark' as PaletteType,
     };
 
-    return createMuiTheme({ palette });
+    const props = {
+        MuiButtonBase: {
+            disableRipple: true,
+        },
+    };
+
+    return createMuiTheme({ palette, props });
 };
 
 export const theme = createTheme();

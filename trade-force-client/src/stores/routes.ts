@@ -28,5 +28,5 @@ export const routes = [
         beforeEnter: checkForUserSignedIn,
     },
     { name: 'notFound', pattern: '/not-found' },
-    { name: 'signin', pattern: '/' },
+    { name: 'signin', pattern: '/signin' },
 ];

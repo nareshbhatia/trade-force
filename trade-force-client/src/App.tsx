@@ -11,7 +11,7 @@ import { observer } from 'mobx-react';
 import { RouterContext, RouterView } from 'mobx-state-router';
 // import { ReactQueryDevtools } from 'react-query-devtools';
 import { theme } from './components';
-import { RootStoreContext } from './contexts';
+import { RootStoreContext, UiContextProvider } from './contexts';
 import { initApp } from './init';
 import { viewMap } from './viewMap';
 
@@ -28,10 +28,12 @@ export const App = observer(() => {
                     <MessageProvider>
                         <RootStoreContext.Provider value={rootStore}>
                             <RouterContext.Provider value={routerStore}>
-                                <CssBaseline />
-                                <RouterView viewMap={viewMap} />
-                                <MessageRenderer />
-                                {/* <ReactQueryDevtools initialIsOpen /> */}
+                                <UiContextProvider>
+                                    <CssBaseline />
+                                    <RouterView viewMap={viewMap} />
+                                    <MessageRenderer />
+                                    {/* <ReactQueryDevtools initialIsOpen /> */}
+                                </UiContextProvider>
                             </RouterContext.Provider>
                         </RootStoreContext.Provider>
                     </MessageProvider>

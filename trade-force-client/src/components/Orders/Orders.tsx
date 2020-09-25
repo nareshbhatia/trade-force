@@ -15,13 +15,16 @@ import {
     GridApi,
     GridReadyEvent,
     RowSelectedEvent,
+    NavigateToNextCellParams,
     ValueGetterParams,
 } from 'ag-grid-community';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import classNames from 'classnames';
+import { useUiState, useUiStateSetter } from '../../contexts';
 import { useOrders, useSecurities, useUsers } from '../../hooks';
 import { PanelHeader } from '../PanelHeader';
 import 'ag-grid-enterprise';
+import { CellPosition } from 'ag-grid-community/dist/lib/entities/cellPosition';
 
 const useStyles = makeStyles((theme: Theme) => ({
     panelHeader: {
@@ -55,6 +58,8 @@ export const Orders = () => {
     const classes = useStyles();
     const [gridApi, setGridApi] = useState<GridApi | undefined>();
     const [gridColumnApi, setGridColumnApi] = useState<ColumnApi | undefined>();
+    const uiState = useUiState();
+    const setUiState = useUiStateSetter();
 
     const {
         isLoading: isOrdersLoading,
@@ -79,7 +84,11 @@ export const Orders = () => {
 
     const handleRowSelected = (event: RowSelectedEvent) => {
         if (event.node.isSelected()) {
-            console.log(event.node.data.secId);
+            setUiState({
+                ...uiState,
+                isOrderTicketOpen: true,
+                targetOrder: event.node.data,
+            });
         }
     };
 
@@ -126,6 +135,48 @@ export const Orders = () => {
         return user !== undefined ? user.initials : id;
     };
 
+    const keyboardNavigation = (
+        params: NavigateToNextCellParams
+    ): CellPosition => {
+        if (gridApi === undefined) {
+            throw new Error('This should never happen!');
+        }
+
+        let previousCell = params.previousCellPosition;
+        const suggestedNextCell = params.nextCellPosition;
+
+        const KEY_UP = 38;
+        const KEY_DOWN = 40;
+        const KEY_LEFT = 37;
+        const KEY_RIGHT = 39;
+
+        switch (params.key) {
+            case KEY_DOWN:
+                previousCell = params.previousCellPosition;
+                // set selected cell on current cell + 1
+                gridApi.forEachNode(function (node) {
+                    if (previousCell.rowIndex + 1 === node.rowIndex) {
+                        node.setSelected(true);
+                    }
+                });
+                return suggestedNextCell;
+            case KEY_UP:
+                previousCell = params.previousCellPosition;
+                // set selected cell on current cell - 1
+                gridApi.forEachNode(function (node) {
+                    if (previousCell.rowIndex - 1 === node.rowIndex) {
+                        node.setSelected(true);
+                    }
+                });
+                return suggestedNextCell;
+            case KEY_LEFT:
+            case KEY_RIGHT:
+                return suggestedNextCell;
+            default:
+                throw new Error('This should never happen!');
+        }
+    };
+
     // Allow ErrorBoundary to handle errors
     if (isOrdersError || isSecuritiesError || isUsersError) {
         throw new Error('Error loading data');
@@ -158,6 +209,7 @@ export const Orders = () => {
                     gridOptions={{
                         rowHeight: 36,
                         suppressCellSelection: true,
+                        navigateToNextCell: keyboardNavigation,
                     }}
                     onGridReady={handleGridReady}
                     onRowSelected={handleRowSelected}

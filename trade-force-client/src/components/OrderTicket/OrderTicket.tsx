@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
-import { newOrder, Order, OrderSideLookup } from '@trade-force/models';
+import { Order, OrderSideLookup } from '@trade-force/models';
 import classNames from 'classnames';
+import { useUiState, useUiStateSetter } from '../../contexts';
 import { PanelHeader } from '../PanelHeader';
 import { OrderForm } from './OrderForm';
 
@@ -27,13 +28,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export interface OrderTicketProps {
-    onClose: () => void;
-}
-
-export const OrderTicket = ({ onClose }: OrderTicketProps) => {
+export const OrderTicket = () => {
     const classes = useStyles();
-    const order = newOrder('buy');
+    const uiState = useUiState();
+    const setUiState = useUiStateSetter();
+
+    const { targetOrder: order } = uiState;
+    if (order === undefined) {
+        return null;
+    }
+
     const { side } = order;
 
     const ticketClass = side === 'buy' ? classes.buyTicket : classes.sellTicket;
@@ -47,14 +51,23 @@ export const OrderTicket = ({ onClose }: OrderTicketProps) => {
         console.log(order);
     };
 
+    const handleClose = async () => {
+        setUiState({
+            ...uiState,
+            isOrderTicketOpen: false,
+            targetOrder: undefined,
+        });
+    };
+
     return (
         <VerticalContainer>
-            <PanelHeader showCloseButton onClose={onClose}>
+            <PanelHeader showCloseButton onClose={handleClose}>
                 Order Ticket
             </PanelHeader>
             <VerticalContainer px={2} py={1} className={ticketClass}>
                 <h1 className={titleClass}>{title}</h1>
-                <OrderForm order={order} onSave={handleSave} />
+                {/* Create a new instance of the form if order changes */}
+                <OrderForm key={order.id} order={order} onSave={handleSave} />
             </VerticalContainer>
         </VerticalContainer>
     );
