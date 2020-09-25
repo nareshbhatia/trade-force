@@ -42,3 +42,24 @@ export const newOrder = (side: Side): Order => ({
     managerId: '',
     note: '',
 });
+
+// Lookups
+export const OrderSideLookup: { [key in Side]: string } = {
+    buy: 'Buy',
+    sell: 'Sell',
+};
+
+export const OrderTypeLookup: { [key in OrderType]: string } = {
+    market: 'Market',
+    limit: 'Limit',
+};
+
+export const OrderStatusLookup: { [key in OrderStatus]: string } = {
+    new: 'New',
+    pendingApproval: 'Pending Approval',
+    approved: 'Approved',
+    rejected: 'Rejected',
+    placed: 'Placed',
+    executed: 'Executed',
+    canceled: 'Canceled',
+};
