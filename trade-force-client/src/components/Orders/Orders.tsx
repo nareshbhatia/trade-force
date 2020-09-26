@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import {
@@ -11,7 +11,6 @@ import {
 } from '@trade-force/models';
 import {
     CellClassParams,
-    ColumnApi,
     GridApi,
     GridReadyEvent,
     RowSelectedEvent,
@@ -56,10 +55,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const Orders = () => {
     const classes = useStyles();
-    const [gridApi, setGridApi] = useState<GridApi | undefined>();
-    const [gridColumnApi, setGridColumnApi] = useState<ColumnApi | undefined>();
     const uiState = useUiState();
     const setUiState = useUiStateSetter();
+
+    // use useRef instead of useState to avoid a stale closure
+    // see https://stackoverflow.com/questions/64071586/
+    const gridApiRef = useRef<GridApi>();
 
     const {
         isLoading: isOrdersLoading,
@@ -78,8 +79,7 @@ export const Orders = () => {
     } = useUsers();
 
     const handleGridReady = (event: GridReadyEvent) => {
-        setGridApi(event.api);
-        setGridColumnApi(event.columnApi);
+        gridApiRef.current = event.api;
     };
 
     const handleRowSelected = (event: RowSelectedEvent) => {
@@ -89,6 +89,49 @@ export const Orders = () => {
                 isOrderTicketOpen: true,
                 targetOrder: event.node.data,
             });
+        }
+    };
+
+    const handleKeyboardNavigation = (
+        params: NavigateToNextCellParams
+    ): CellPosition => {
+        const gridApi = gridApiRef.current;
+        if (gridApi === undefined) {
+            throw new Error('This should never happen!');
+        }
+
+        let previousCell = params.previousCellPosition;
+        const suggestedNextCell = params.nextCellPosition;
+
+        const KEY_UP = 38;
+        const KEY_DOWN = 40;
+        const KEY_LEFT = 37;
+        const KEY_RIGHT = 39;
+
+        switch (params.key) {
+            case KEY_DOWN:
+                previousCell = params.previousCellPosition;
+                // set selected cell on current cell + 1
+                gridApi.forEachNode(function (node) {
+                    if (previousCell.rowIndex + 1 === node.rowIndex) {
+                        node.setSelected(true);
+                    }
+                });
+                return suggestedNextCell;
+            case KEY_UP:
+                previousCell = params.previousCellPosition;
+                // set selected cell on current cell - 1
+                gridApi.forEachNode(function (node) {
+                    if (previousCell.rowIndex - 1 === node.rowIndex) {
+                        node.setSelected(true);
+                    }
+                });
+                return suggestedNextCell;
+            case KEY_LEFT:
+            case KEY_RIGHT:
+                return suggestedNextCell;
+            default:
+                throw new Error('This should never happen!');
         }
     };
 
@@ -135,48 +178,6 @@ export const Orders = () => {
         return user !== undefined ? user.initials : id;
     };
 
-    const keyboardNavigation = (
-        params: NavigateToNextCellParams
-    ): CellPosition => {
-        if (gridApi === undefined) {
-            throw new Error('This should never happen!');
-        }
-
-        let previousCell = params.previousCellPosition;
-        const suggestedNextCell = params.nextCellPosition;
-
-        const KEY_UP = 38;
-        const KEY_DOWN = 40;
-        const KEY_LEFT = 37;
-        const KEY_RIGHT = 39;
-
-        switch (params.key) {
-            case KEY_DOWN:
-                previousCell = params.previousCellPosition;
-                // set selected cell on current cell + 1
-                gridApi.forEachNode(function (node) {
-                    if (previousCell.rowIndex + 1 === node.rowIndex) {
-                        node.setSelected(true);
-                    }
-                });
-                return suggestedNextCell;
-            case KEY_UP:
-                previousCell = params.previousCellPosition;
-                // set selected cell on current cell - 1
-                gridApi.forEachNode(function (node) {
-                    if (previousCell.rowIndex - 1 === node.rowIndex) {
-                        node.setSelected(true);
-                    }
-                });
-                return suggestedNextCell;
-            case KEY_LEFT:
-            case KEY_RIGHT:
-                return suggestedNextCell;
-            default:
-                throw new Error('This should never happen!');
-        }
-    };
-
     // Allow ErrorBoundary to handle errors
     if (isOrdersError || isSecuritiesError || isUsersError) {
         throw new Error('Error loading data');
@@ -209,7 +210,7 @@ export const Orders = () => {
                     gridOptions={{
                         rowHeight: 36,
                         suppressCellSelection: true,
-                        navigateToNextCell: keyboardNavigation,
+                        navigateToNextCell: handleKeyboardNavigation,
                     }}
                     onGridReady={handleGridReady}
                     onRowSelected={handleRowSelected}
