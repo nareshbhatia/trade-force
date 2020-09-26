@@ -20,7 +20,14 @@ export const useSecurities = () => {
     const env = useEnv();
     const apiUrl = env.get(EnvVar.API_URL);
 
-    return useQuery<Array<Security>, 'securities'>('securities', async () => {
-        return fetchSecurities(`${apiUrl}/securities`);
-    });
+    return useQuery<Array<Security>, 'securities'>(
+        'securities',
+        async () => {
+            return fetchSecurities(`${apiUrl}/securities`);
+        },
+        {
+            refetchOnWindowFocus: false,
+            staleTime: Infinity,
+        }
+    );
 };
