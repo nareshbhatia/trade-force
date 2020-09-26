@@ -1,15 +1,13 @@
-import { useEnv } from '@react-force/core';
 import { User } from '@trade-force/models';
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { EnvVar } from '../utils';
+import { tfApi } from '../utils';
 
 /**
  * Fetches users from server
- * @param url
  */
-async function fetchUsers(url: string): Promise<Array<User>> {
-    const resp = await axios.get(url);
+const fetchUsers = async (): Promise<Array<User>> => {
+    // get users
+    const resp = await tfApi.get('/users');
     const users: Array<User> = resp.data;
 
     // Sort by role then display name
@@ -22,23 +20,14 @@ async function fetchUsers(url: string): Promise<Array<User>> {
     });
 
     return users;
-}
+};
 
 /**
  * Hook to fetch users from server
  */
 export const useUsers = () => {
-    const env = useEnv();
-    const apiUrl = env.get(EnvVar.API_URL);
-
-    return useQuery<Array<User>, 'users'>(
-        'users',
-        async () => {
-            return fetchUsers(`${apiUrl}/users`);
-        },
-        {
-            refetchOnWindowFocus: false,
-            staleTime: Infinity,
-        }
-    );
+    return useQuery<Array<User>, 'users'>('users', fetchUsers, {
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+    });
 };
