@@ -6,7 +6,6 @@ export type Side = 'buy' | 'sell';
 export type OrderType = 'market' | 'limit';
 
 export type OrderStatus =
-    | 'new'
     | 'pendingApproval'
     | 'approved'
     | 'rejected'
@@ -37,7 +36,7 @@ export const newOrder = (side: Side): Order => ({
     quantity: 0,
     executed: 0,
     type: 'market',
-    status: 'new',
+    status: 'pendingApproval',
     fundId: '',
     managerId: '',
     note: '',
@@ -55,7 +54,6 @@ export const OrderTypeLookup: { [key in OrderType]: string } = {
 };
 
 export const OrderStatusLookup: { [key in OrderStatus]: string } = {
-    new: 'New',
     pendingApproval: 'Pending Approval',
     approved: 'Approved',
     rejected: 'Rejected',
