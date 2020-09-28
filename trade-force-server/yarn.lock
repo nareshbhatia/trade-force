@@ -36,10 +36,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@trade-force/models@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@trade-force/models/-/models-1.0.2.tgz#7afb40be9847838bf623bd6ebc6627246cc4b053"
-  integrity sha512-s8cUUD0BrvoKbQ+loJvRvF5XhV59oJNPqZoFkh6wmctSQwbLsO0+V+VvTrwOervsrW4nKn3Xci1WQl917+ttQw==
+"@trade-force/models@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@trade-force/models/-/models-1.1.1.tgz#9801c104e3b7e03dcb025bec17749c2794d274e4"
+  integrity sha512-b69Hlh5jZpN38DH43rSOM467rH2HLWfBJWx86BTAImHi0bQO07Q9F1D5N9ZBJ5/HofI5yrL8vix49/5gDavJow==
   dependencies:
     tslib "^2.0.1"
     uuid "^8.3.0"

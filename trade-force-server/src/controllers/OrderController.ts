@@ -1,8 +1,10 @@
-import { Order } from '@trade-force/models';
+import { CollectionModel, Order, UserId } from '@trade-force/models';
 import { inject } from 'inversify';
-import { controller, httpGet, queryParam } from 'inversify-express-utils';
+import { controller, httpGet, requestHeaders } from 'inversify-express-utils';
 import TYPES from '../constants/types';
 import { OrderService } from '../services';
+
+const USER_ID_HEADER = 'Trade-Force-User';
 
 @controller('/orders')
 export class OrderController {
@@ -11,7 +13,9 @@ export class OrderController {
     ) {}
 
     @httpGet('/')
-    public async getOrders(): Promise<Array<Order>> {
-        return await this.orderService.getOrders();
+    public async getOrders(
+        @requestHeaders(USER_ID_HEADER) userId: UserId
+    ): Promise<CollectionModel<Order>> {
+        return await this.orderService.getOrders(userId);
     }
 }

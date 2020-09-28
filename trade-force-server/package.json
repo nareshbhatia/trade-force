@@ -23,7 +23,7 @@
     "@react-force/http-utils": "^1.2.0",
     "@react-force/models": "^1.2.0",
     "@react-force/utils": "^2.3.0",
-    "@trade-force/models": "^1.0.2",
+    "@trade-force/models": "^1.1.1",
     "axios": "0.19.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
