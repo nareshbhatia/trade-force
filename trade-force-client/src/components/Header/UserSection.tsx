@@ -11,15 +11,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface UserSectionProps {
-    user?: User;
+    user: User;
 }
 
 export const UserSection = ({ user }: UserSectionProps) => {
     const classes = useStyles();
-
-    if (user === undefined) {
-        return null;
-    }
 
     return (
         <Fragment>

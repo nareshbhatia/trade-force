@@ -31,7 +31,7 @@
     "@react-force/number-utils": "^2.1.0",
     "@react-force/utils": "^2.3.0",
     "@react-force/web-utils": "^2.1.0",
-    "@trade-force/models": "^1.0.2",
+    "@trade-force/models": "^1.1.2",
     "ag-grid-community": "^24.0.0",
     "ag-grid-enterprise": "^24.0.0",
     "ag-grid-react": "^24.0.0",
@@ -43,7 +43,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-query": "^2.23.0",
-    "react-query-devtools": "^2.5.0",
+    "react-query-devtools": "^2.5.1",
     "yup": "^0.29.3"
   },
   "devDependencies": {

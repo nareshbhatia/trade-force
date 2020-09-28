@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { newOrder, User } from '@trade-force/models';
+import { newOrder } from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
+import { useOrders } from '../../hooks';
 import { ActionButton } from '../ActionButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -13,14 +14,30 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export interface NewOrderSectionProps {
-    user?: User;
-}
-
-export const NewOrderSection = ({ user }: NewOrderSectionProps) => {
+export const NewOrderSection = () => {
     const classes = useStyles();
     const uiState = useUiState();
     const setUiState = useUiStateSetter();
+
+    const {
+        isLoading: isOrdersLoading,
+        isError: isOrdersError,
+        data: ordersModel,
+        error: ordersError,
+    } = useOrders();
+
+    // Allow ErrorBoundary to handle errors
+    if (isOrdersError) {
+        throw ordersError;
+    }
+
+    if (isOrdersLoading) {
+        return null;
+    }
+
+    if (ordersModel === undefined) {
+        throw new Error('Error loading data');
+    }
 
     const handleNewBuy = () => {
         setUiState({
@@ -38,9 +55,8 @@ export const NewOrderSection = ({ user }: NewOrderSectionProps) => {
         });
     };
 
-    // TODO: add condition for user is allowed to create orders
-    // Can't create orders if user is not defined
-    if (user === undefined) {
+    // Can't create orders if user doesn't have permissions
+    if (ordersModel.getLink('create') === undefined) {
         return null;
     }
 

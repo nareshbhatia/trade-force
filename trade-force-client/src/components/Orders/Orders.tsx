@@ -65,7 +65,7 @@ export const Orders = () => {
     const {
         isLoading: isOrdersLoading,
         isError: isOrdersError,
-        data: orders,
+        data: ordersModel,
     } = useOrders();
     const {
         isLoading: isSecuritiesLoading,
@@ -188,7 +188,7 @@ export const Orders = () => {
     }
 
     if (
-        orders === undefined ||
+        ordersModel === undefined ||
         securities === undefined ||
         users === undefined
     ) {
@@ -200,7 +200,7 @@ export const Orders = () => {
             <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
             <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
                 <AgGridReact
-                    rowData={orders}
+                    rowData={ordersModel.getContent()}
                     rowSelection={'single'}
                     defaultColDef={{
                         resizable: true,

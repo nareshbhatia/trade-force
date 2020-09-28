@@ -24,8 +24,8 @@ export const Header = ({ user }: HeaderProps) => {
         <AppBar color="transparent" elevation={0} position="static">
             <Toolbar className={classes.toolbar}>
                 <HeaderTitle>Trade Force</HeaderTitle>
-                <NewOrderSection user={user} />
-                <UserSection user={user} />
+                {user !== undefined ? <NewOrderSection /> : null}
+                {user !== undefined ? <UserSection user={user} /> : null}
             </Toolbar>
         </AppBar>
     );
