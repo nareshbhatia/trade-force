@@ -1,18 +1,35 @@
 /**
  * A reference to a target resource.
  */
-interface Link {
+export interface Link {
     href: string;
+}
+
+/**
+ * A map of links, keyed by a relation name. For example,
+ * _links: {
+ *     "self": { "href": "/orders" },
+ *     "create": { "href": "/orders" }
+ * }
+ */
+export interface LinkMap {
+    [relation: string]: Link;
 }
 
 /**
  * A container for a collection of Links with convenience methods to manage them.
  */
 export class RepresentationModel {
-    private _links: { [relation: string]: Link } = {};
+    private _links: LinkMap = {};
 
     addLink(relation: string, link: Link): void {
         this._links[relation] = link;
+    }
+
+    addLinks(linkMap: LinkMap): void {
+        for (const [relation, link] of Object.entries(linkMap)) {
+            this._links[relation] = link;
+        }
     }
 
     getLink(relation: string): Link | undefined {
