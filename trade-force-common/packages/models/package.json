@@ -1,7 +1,7 @@
 {
   "name": "@trade-force/models",
   "description": "Domain models",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "Naresh Bhatia",
   "license": "MIT",
   "repository": {
