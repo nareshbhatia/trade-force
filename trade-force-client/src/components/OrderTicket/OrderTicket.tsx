@@ -33,11 +33,12 @@ export const OrderTicket = () => {
     const uiState = useUiState();
     const setUiState = useUiStateSetter();
 
-    const { targetOrder: order } = uiState;
-    if (order === undefined) {
+    const { targetOrder: orderModel } = uiState;
+    if (orderModel === undefined) {
         return null;
     }
 
+    const order = orderModel.getContent();
     const { side } = order;
 
     const ticketClass = side === 'buy' ? classes.buyTicket : classes.sellTicket;

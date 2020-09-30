@@ -1,8 +1,8 @@
-import { Order } from '@trade-force/models';
+import { OrderEntityModel } from '@trade-force/models';
 
 export interface UiState {
     isOrderTicketOpen: boolean;
-    targetOrder?: Order;
+    targetOrder?: OrderEntityModel;
 }
 
 export const InitialUiState: UiState = {
