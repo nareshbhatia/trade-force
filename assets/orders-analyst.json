@@ -1,6 +1,6 @@
 {
-  "_embedded": {
-    "orders": [{
+  "_embedded": [
+    {
       "_embedded": {
         "id": "f95244e6-1a1a-51ea-8c9a-0bca651329c6",
         "side": "buy",
@@ -19,8 +19,8 @@
         "reject": { "href": "/orders/f95244e6-1a1a-51ea-8c9a-0bca651329c6" },
         "cancel": { "href": "/orders/f95244e6-1a1a-51ea-8c9a-0bca651329c6" }
       }
-    }]
-  },
+    }
+  ],
   "_links": {
     "self": { "href": "/orders" }
   }

@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import {
+    Order,
+    OrderEntityModel,
     OrderSideLookup,
     OrderStatus,
     OrderStatusLookup,
@@ -65,7 +67,7 @@ export const Orders = () => {
     const {
         isLoading: isOrdersLoading,
         isError: isOrdersError,
-        data: ordersModel,
+        data: orderCollectionModel,
     } = useOrders();
     const {
         isLoading: isSecuritiesLoading,
@@ -188,19 +190,24 @@ export const Orders = () => {
     }
 
     if (
-        ordersModel === undefined ||
+        orderCollectionModel === undefined ||
         securities === undefined ||
         users === undefined
     ) {
         throw new Error('Error loading data');
     }
 
+    const orderEntityModels: Array<OrderEntityModel> = orderCollectionModel.getContent();
+    const orders: Array<Order> = orderEntityModels.map((orderEntityModel) =>
+        orderEntityModel.getContent()
+    );
+
     return (
         <VerticalContainer>
             <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
             <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
                 <AgGridReact
-                    rowData={ordersModel.getContent()}
+                    rowData={orders}
                     rowSelection={'single'}
                     defaultColDef={{
                         resizable: true,
