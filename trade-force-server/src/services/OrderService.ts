@@ -24,7 +24,7 @@ export class OrderService {
                 const orderEntityModel = new EntityModel<Order>(order);
 
                 // Add links
-                getAllowedActions(order.status, user.role).forEach((action) => {
+                getAllowedActions(order, user).forEach((action) => {
                     orderEntityModel.addLink(action, {
                         href: `/orders/${order.id}`,
                     });

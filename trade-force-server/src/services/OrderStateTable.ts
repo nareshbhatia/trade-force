@@ -1,4 +1,10 @@
-import { OrderAction, OrderStatus, UserRole } from '@trade-force/models';
+import {
+    Order,
+    OrderAction,
+    OrderStatus,
+    User,
+    UserRole,
+} from '@trade-force/models';
 
 type UserRoleExtended = UserRole | 'any';
 
@@ -49,7 +55,7 @@ const orderStateTable: Array<OrderStateTransition> = [
     {
         currentState: 'rejected',
         role: 'pm',
-        action: 'resubmit',
+        action: 'update',
         nextState: 'pendingApproval',
     },
     {
@@ -61,16 +67,20 @@ const orderStateTable: Array<OrderStateTransition> = [
 ];
 
 export const getAllowedActions = (
-    currentState: OrderStatus,
-    role: UserRole
+    order: Order,
+    user: User
 ): Array<OrderAction> => {
     const actions: Array<OrderAction> = [];
     orderStateTable.forEach((transition) => {
         if (
-            currentState === transition.currentState &&
-            (role === transition.role || transition.role === 'any')
+            order.status === transition.currentState &&
+            (user.role === transition.role || transition.role === 'any')
         ) {
-            actions.push(transition.action);
+            if (transition.action === 'update' && user.id !== order.managerId) {
+                // don't allow other managers to update orders
+            } else {
+                actions.push(transition.action);
+            }
         }
     });
 

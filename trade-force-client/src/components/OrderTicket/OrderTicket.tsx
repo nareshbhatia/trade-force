@@ -48,6 +48,8 @@ export const OrderTicket = () => {
     );
     const title = OrderSideLookup[order.side];
 
+    const editable = order.status === 'new' || orderModel.getLink('update');
+
     const handleSave = async (order: Order) => {
         console.log(order);
     };
@@ -67,8 +69,14 @@ export const OrderTicket = () => {
             </PanelHeader>
             <VerticalContainer px={2} py={1} className={ticketClass}>
                 <h1 className={titleClass}>{title}</h1>
-                {/* Create a new instance of the form if order changes */}
-                <OrderForm key={order.id} order={order} onSave={handleSave} />
+                {/* Create a new instance if order changes */}
+                {editable ? (
+                    <OrderForm
+                        key={order.id}
+                        order={order}
+                        onSave={handleSave}
+                    />
+                ) : null}
             </VerticalContainer>
         </VerticalContainer>
     );
