@@ -4,21 +4,13 @@ import { TextField } from '@react-force/formik-mui';
 import { Order } from '@trade-force/models';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { ActionBar } from '../ActionBar';
 import { ActionButton } from '../ActionButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
-    },
-    actionBar: {
-        marginTop: theme.spacing(1) * 1.5,
-        display: 'flex',
-        alignItems: 'center',
-        flex: '0 0 auto',
-        '& > :not(:first-child)': {
-            marginLeft: theme.spacing(1),
-        },
     },
 }));
 
@@ -105,7 +97,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         InputLabelProps={{ shrink: true }}
                     />
 
-                    <div className={classes.actionBar}>
+                    <ActionBar>
                         <ActionButton
                             customAction={
                                 order.side === 'buy'
@@ -115,7 +107,7 @@ export const OrderForm = ({ order, onSave }: OrderFormProps) => {
                         >
                             Submit
                         </ActionButton>
-                    </div>
+                    </ActionBar>
                 </Form>
             )}
         </Formik>

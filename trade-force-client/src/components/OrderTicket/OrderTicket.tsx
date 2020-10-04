@@ -69,7 +69,7 @@ export const OrderTicket = () => {
                         onSave={handleSave}
                     />
                 ) : (
-                    <OrderView key={order.id} order={order} />
+                    <OrderView key={order.id} orderModel={orderModel} />
                 )}
             </VerticalContainer>
         </VerticalContainer>

@@ -1,3 +1,4 @@
+export * from './ActionBar';
 export * from './ActionButton';
 export * from './Header';
 export * from './Orders';

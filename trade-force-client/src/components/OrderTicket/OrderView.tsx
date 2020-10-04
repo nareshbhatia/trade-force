@@ -3,9 +3,15 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import { NumberUtils } from '@react-force/number-utils';
 import { StringUtils } from '@react-force/utils';
-import { Order, OrderStatusLookup, OrderTypeLookup } from '@trade-force/models';
+import {
+    OrderEntityModel,
+    OrderStatusLookup,
+    OrderTypeLookup,
+} from '@trade-force/models';
 import classNames from 'classnames';
 import { useSecurities, useUsers } from '../../hooks';
+import { ActionBar } from '../ActionBar';
+import { ActionButton } from '../ActionButton';
 import { ProgressBar } from '../ProgressBar';
 import { Subtitle, SectionTitle } from '../Text';
 
@@ -52,10 +58,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface OrderViewProps {
-    order: Order;
+    orderModel: OrderEntityModel;
 }
 
-export const OrderView = ({ order }: OrderViewProps) => {
+export const OrderView = ({ orderModel }: OrderViewProps) => {
     const classes = useStyles();
 
     const {
@@ -82,6 +88,8 @@ export const OrderView = ({ order }: OrderViewProps) => {
         throw new Error('Error loading data');
     }
 
+    const order = orderModel.getContent();
+
     const {
         analystId,
         executed,
@@ -96,6 +104,8 @@ export const OrderView = ({ order }: OrderViewProps) => {
         traderId,
         type,
     } = order;
+
+    const customAction = order.side === 'buy' ? 'buyInForm' : 'sellInForm';
 
     const pctDone = (executed / quantity) * 100;
     const pctDoneStr = `${NumberUtils.format(pctDone, '0')}%`;
@@ -166,6 +176,29 @@ export const OrderView = ({ order }: OrderViewProps) => {
                     <div>{note}</div>
                 </Fragment>
             )}
+
+            <ActionBar>
+                {orderModel.getLink('approve') !== undefined ? (
+                    <ActionButton customAction={customAction}>
+                        Approve
+                    </ActionButton>
+                ) : null}
+                {orderModel.getLink('reject') !== undefined ? (
+                    <ActionButton customAction={customAction}>
+                        Reject
+                    </ActionButton>
+                ) : null}
+                {orderModel.getLink('place') !== undefined ? (
+                    <ActionButton customAction={customAction}>
+                        Place
+                    </ActionButton>
+                ) : null}
+                {orderModel.getLink('cancel') !== undefined ? (
+                    <ActionButton customAction={customAction}>
+                        Cancel
+                    </ActionButton>
+                ) : null}
+            </ActionBar>
         </VerticalContainer>
     );
 };
