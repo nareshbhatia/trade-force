@@ -80,6 +80,7 @@ export const getAllowedActions = (
                 // don't allow other managers to update orders
             } else if (
                 transition.action === 'cancel' &&
+                user.role === 'pm' &&
                 user.id !== order.managerId
             ) {
                 // don't allow other managers to cancel orders
