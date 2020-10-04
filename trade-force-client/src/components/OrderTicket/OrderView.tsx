@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import { NumberUtils } from '@react-force/number-utils';
@@ -6,6 +6,7 @@ import { StringUtils } from '@react-force/utils';
 import { Order, OrderStatusLookup, OrderTypeLookup } from '@trade-force/models';
 import classNames from 'classnames';
 import { useSecurities, useUsers } from '../../hooks';
+import { ProgressBar } from '../ProgressBar';
 import { Subtitle, SectionTitle } from '../Text';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,12 +40,14 @@ const useStyles = makeStyles((theme: Theme) => ({
         justifyContent: 'space-between',
         color: theme.palette.secondary.main,
     },
+    progressBar: {
+        height: 20,
+        marginTop: 4,
+        marginBottom: 4,
+    },
     done: {
         color: theme.palette.secondary.dark,
         fontSize: 10,
-    },
-    note: {
-        marginTop: theme.spacing(2),
     },
 }));
 
@@ -141,6 +144,7 @@ export const OrderView = ({ order }: OrderViewProps) => {
 
             <SectionTitle className={sectionClass}>Order Progress</SectionTitle>
             <div className={classes.status}>{OrderStatusLookup[status]}</div>
+            <ProgressBar className={classes.progressBar} pctDone={pctDone} />
             <div className={classes.progress}>
                 <span>{pctDoneStr}</span>
                 <span>{qtyStr}</span>
@@ -157,7 +161,10 @@ export const OrderView = ({ order }: OrderViewProps) => {
             <div>Trader: {trader !== undefined ? trader.displayName : '-'}</div>
 
             {StringUtils.isBlank(note) ? null : (
-                <div className={classes.note}>{note}</div>
+                <Fragment>
+                    <SectionTitle className={sectionClass}>Note</SectionTitle>
+                    <div>{note}</div>
+                </Fragment>
             )}
         </VerticalContainer>
     );
