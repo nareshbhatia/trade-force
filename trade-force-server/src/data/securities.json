@@ -301,7 +301,7 @@
   },
   {
     "id": "AEO",
-    "name": "AMERICAN EAGLE OUTFITTERS INC",
+    "name": "American Eagle Outfitters Inc",
     "price": 14.14
   },
   {
@@ -361,7 +361,7 @@
   },
   {
     "id": "AGN",
-    "name": "Allergan plc",
+    "name": "Allergan Plc",
     "price": 193.02
   },
   {
@@ -1681,7 +1681,7 @@
   },
   {
     "id": "BWA",
-    "name": "BORGWARNER INC",
+    "name": "Borgwarner Inc",
     "price": 37.41
   },
   {
@@ -5261,7 +5261,7 @@
   },
   {
     "id": "JBL",
-    "name": "JABIL CIRCUIT INC",
+    "name": "Jabil Circuit Inc",
     "price": 32.95
   },
   {
@@ -10046,7 +10046,7 @@
   },
   {
     "id": "UTL",
-    "name": "UNITIL CORP",
+    "name": "Unitil Corp",
     "price": 38.79
   },
   {
@@ -10391,12 +10391,12 @@
   },
   {
     "id": "WFT",
-    "name": "Weatherford International plc",
+    "name": "Weatherford International Plc",
     "price": 0.02
   },
   {
     "id": "WFT_OLD",
-    "name": "Weatherford International LTD",
+    "name": "Weatherford International Ltd",
     "price": 0.02
   },
   {

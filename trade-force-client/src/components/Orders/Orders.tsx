@@ -34,6 +34,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: '100%',
         width: '100%',
     },
+    buyLegend: {
+        backgroundColor: theme.palette.business.buyLegend,
+    },
+    sellLegend: {
+        backgroundColor: theme.palette.business.sellLegend,
+    },
     side: {
         color: theme.palette.text.emphasis,
         fontSize: 16,
@@ -45,12 +51,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     sellText: {
         color: theme.palette.business.sellText,
-    },
-    buyLegend: {
-        backgroundColor: theme.palette.business.buyLegend,
-    },
-    sellLegend: {
-        backgroundColor: theme.palette.business.sellLegend,
     },
     symbol: {
         color: theme.palette.text.emphasis,
@@ -142,6 +142,12 @@ export const Orders = () => {
         }
     };
 
+    const sideLegendCellClass = (params: CellClassParams) => {
+        return params.data._embedded.side === 'buy'
+            ? classes.buyLegend
+            : classes.sellLegend;
+    };
+
     const sideCellClass = (params: CellClassParams) => {
         return [
             classes.side,
@@ -153,19 +159,6 @@ export const Orders = () => {
 
     const sideValueGetter = (params: ValueGetterParams) => {
         return OrderSideLookup[params.data._embedded.side as Side];
-    };
-
-    const sideLegendCellClass = (params: CellClassParams) => {
-        return [
-            params.data._embedded.side === 'buy'
-                ? classes.buyLegend
-                : classes.sellLegend,
-        ];
-    };
-
-    const sideLegendValueGetter = () => {
-        // return blank string - this cell only renders the buy/sell color
-        return '';
     };
 
     const securityNameValueGetter = (params: ValueGetterParams) => {
@@ -240,11 +233,11 @@ export const Orders = () => {
                     onRowSelected={handleRowSelected}
                 >
                     <AgGridColumn
-                        field="_embedded.side"
-                        headerName=""
-                        width={8}
+                        width={12}
+                        minWidth={12}
                         cellClass={sideLegendCellClass}
-                        valueGetter={sideLegendValueGetter}
+                        // padding must be set using cellStyle, not cellClass
+                        cellStyle={{ padding: 0 }}
                     />
                     <AgGridColumn
                         field="_embedded.side"

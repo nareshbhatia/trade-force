@@ -6,6 +6,8 @@ software development such as:
 1. [REST maturity level 3 API](https://martinfowler.com/articles/richardsonMaturityModel.html)
 2. Rendering a large dataset in [ag-Grid]() using the Server-Side Row Model
 
+![Screen Shot](assets/screenshot.png)
+
 # Quick Start
 
 Follow the steps below to see the application running. Detailed explanations are
