@@ -18,11 +18,12 @@
       "secId": "TJX",
       "quantity": 5100,
       "executed": 0,
-      "type": "market",
+      "type": "limit",
+      "limitPrice": 55.00,
       "status": "pendingApproval",
       "fundId": "TFGOV",
       "managerId": "elvis.presley",
-      "note": ""
+      "note": "Cancel if price drops below 54.00"
     },
     {
       "id": "ff8b2eeb-5ec2-5a8b-9b56-90d4c6c80b7e",

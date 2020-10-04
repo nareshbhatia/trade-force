@@ -2,18 +2,13 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import { Order, OrderSideLookup } from '@trade-force/models';
-import classNames from 'classnames';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { PanelHeader } from '../PanelHeader';
+import { Title } from '../Text';
 import { OrderForm } from './OrderForm';
+import { OrderView } from './OrderView';
 
 const useStyles = makeStyles((theme: Theme) => ({
-    title: {
-        fontSize: 24,
-        fontWeight: theme.typography.fontWeightMedium,
-        margin: 0,
-        textTransform: 'uppercase',
-    },
     buyTicket: {
         backgroundColor: theme.palette.business.buyBackground,
     },
@@ -42,10 +37,7 @@ export const OrderTicket = () => {
     const { side } = order;
 
     const ticketClass = side === 'buy' ? classes.buyTicket : classes.sellTicket;
-    const titleClass = classNames(
-        classes.title,
-        side === 'buy' ? classes.buyText : classes.sellText
-    );
+    const titleClass = side === 'buy' ? classes.buyText : classes.sellText;
     const title = OrderSideLookup[order.side];
 
     const editable = order.status === 'new' || orderModel.getLink('update');
@@ -68,7 +60,7 @@ export const OrderTicket = () => {
                 Order Ticket
             </PanelHeader>
             <VerticalContainer px={2} py={1} className={ticketClass}>
-                <h1 className={titleClass}>{title}</h1>
+                <Title className={titleClass}>{title}</Title>
                 {/* Create a new instance if order changes */}
                 {editable ? (
                     <OrderForm
@@ -76,7 +68,9 @@ export const OrderTicket = () => {
                         order={order}
                         onSave={handleSave}
                     />
-                ) : null}
+                ) : (
+                    <OrderView key={order.id} order={order} />
+                )}
             </VerticalContainer>
         </VerticalContainer>
     );

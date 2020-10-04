@@ -50,6 +50,7 @@ const createTheme = () => {
         },
         secondary: {
             main: '#F2D200',
+            dark: '#C8990A',
         },
         error: {
             main: '#D90000',

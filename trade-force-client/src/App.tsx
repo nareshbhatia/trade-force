@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import {
+    CssBaseline,
     ErrorBoundary,
     Loading,
     MessageProvider,

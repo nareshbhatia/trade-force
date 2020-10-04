@@ -25,7 +25,7 @@ export const HomePage = () => {
                 {isOrderTicketOpen ? (
                     <Fragment>
                         <Divider orientation="vertical" flexItem />
-                        <VerticalContainer flex="0 0 256px">
+                        <VerticalContainer flex="0 0 300px">
                             <OrderTicket />
                         </VerticalContainer>
                     </Fragment>
