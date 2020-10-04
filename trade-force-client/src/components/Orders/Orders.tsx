@@ -46,6 +46,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     sellText: {
         color: theme.palette.business.sellText,
     },
+    buyLegend: {
+        backgroundColor: theme.palette.business.buyLegend,
+    },
+    sellLegend: {
+        backgroundColor: theme.palette.business.sellLegend,
+    },
     symbol: {
         color: theme.palette.text.emphasis,
         fontFamily: 'Source Sans Pro',
@@ -149,6 +155,19 @@ export const Orders = () => {
         return OrderSideLookup[params.data._embedded.side as Side];
     };
 
+    const sideLegendCellClass = (params: CellClassParams) => {
+        return [
+            params.data._embedded.side === 'buy'
+                ? classes.buyLegend
+                : classes.sellLegend,
+        ];
+    };
+
+    const sideLegendValueGetter = () => {
+        // return blank string - this cell only renders the buy/sell color
+        return '';
+    };
+
     const securityNameValueGetter = (params: ValueGetterParams) => {
         const id = params.data._embedded.secId;
         const security = securities?.find((security) => security.id === id);
@@ -220,6 +239,13 @@ export const Orders = () => {
                     onGridReady={handleGridReady}
                     onRowSelected={handleRowSelected}
                 >
+                    <AgGridColumn
+                        field="_embedded.side"
+                        headerName=""
+                        width={8}
+                        cellClass={sideLegendCellClass}
+                        valueGetter={sideLegendValueGetter}
+                    />
                     <AgGridColumn
                         field="_embedded.side"
                         headerName="Side"
