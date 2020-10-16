@@ -12,6 +12,7 @@ const mockedUseUsers = useUsers as jest.Mocked<typeof useUsers>;
 // ----- Test -----
 describe('SignInPage', () => {
     it('shows a list of users', async () => {
+        // TODO: fix the TypeScript error below
         mockedUseUsers.mockReturnValue({
             isLoading: false,
             isError: false,

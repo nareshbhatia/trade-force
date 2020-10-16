@@ -41,7 +41,7 @@ export const SignInHelp = ({ users }: SignInHelpProps) => {
                 </TableHead>
                 <TableBody>
                     {users.map((user) => (
-                        <TableRow key={user.id} hover>
+                        <TableRow key={user.id} data-testid="user-row" hover>
                             <TableCell>{user.id}</TableCell>
                             <TableCell>{user.displayName}</TableCell>
                             <TableCell>{UserRoleLookup[user.role]}</TableCell>
