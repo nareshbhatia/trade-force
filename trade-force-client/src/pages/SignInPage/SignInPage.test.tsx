@@ -3,6 +3,12 @@ import { render } from '@testing-library/react';
 import { useUsers } from '../../hooks';
 import { SignInPage } from './SignInPage';
 
+jest.mock('../../contexts/RootStoreContext', () => ({
+    useRootStore: () => ({
+        authStore: jest.fn(),
+    }),
+}));
+
 jest.mock('../../hooks/useUsers', () => ({
     useUsers: jest.fn(),
 }));
