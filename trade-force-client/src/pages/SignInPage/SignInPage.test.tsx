@@ -1,4 +1,5 @@
 import React from 'react';
+import { MessageProvider } from '@react-force/core';
 import { render } from '@testing-library/react';
 import { useUsers } from '../../hooks';
 import { SignInPage } from './SignInPage';
@@ -6,6 +7,7 @@ import { SignInPage } from './SignInPage';
 jest.mock('../../contexts/RootStoreContext', () => ({
     useRootStore: () => ({
         authStore: jest.fn(),
+        routerStore: jest.fn(),
     }),
 }));
 
@@ -13,12 +15,11 @@ jest.mock('../../hooks/useUsers', () => ({
     useUsers: jest.fn(),
 }));
 
-const mockedUseUsers = useUsers as jest.Mocked<typeof useUsers>;
+const mockedUseUsers = useUsers as jest.Mock;
 
 // ----- Test -----
 describe('SignInPage', () => {
     it('shows a list of users', async () => {
-        // TODO: fix the TypeScript error below
         mockedUseUsers.mockReturnValue({
             isLoading: false,
             isError: false,
@@ -43,7 +44,11 @@ describe('SignInPage', () => {
                 },
             ],
         });
-        const { findAllByTestId } = render(<SignInPage />);
+        const { findAllByTestId } = render(
+            <MessageProvider>
+                <SignInPage />
+            </MessageProvider>
+        );
         const userRows = await findAllByTestId('user-row');
         expect(userRows.length).toBe(3);
     });
