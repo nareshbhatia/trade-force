@@ -67,7 +67,7 @@ describe('hateoas', () => {
     it('CollectionModel can be created from an entities', () => {
         const result = CollectionModel.create<Order>();
 
-        // Add a linkorder1CollectionModel
+        // Add a link
         CollectionModel.addLink(result, 'self', '/orders');
 
         // Add an EntityModel

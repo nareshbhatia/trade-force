@@ -39,7 +39,9 @@ export class OrderController {
         }
 
         // fetch orders and return in response
-        const orderCollectionModel = await this.orderService.getOrders(user);
-        res.status(HttpStatusCode.Ok).send(orderCollectionModel);
+        const collectionModel = await this.orderService.getOrders(user);
+        res.status(HttpStatusCode.Ok).send(
+            CollectionModel.serialize<Order>(collectionModel, 'orders')
+        );
     }
 }

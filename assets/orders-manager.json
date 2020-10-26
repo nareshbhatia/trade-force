@@ -21,6 +21,6 @@
   },
   "_links": {
     "self": { "href": "/orders" },
-    "create": { "href": "/orders" }
+    "createOrder": { "href": "/orders" }
   }
 }
