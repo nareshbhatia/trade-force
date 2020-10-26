@@ -19,49 +19,49 @@ const orderStateTable: Array<OrderStateTransition> = [
     {
         currentState: 'pendingApproval',
         role: 'pa',
-        action: 'approve',
+        action: 'approveOrder',
         nextState: 'approved',
     },
     {
         currentState: 'pendingApproval',
         role: 'pa',
-        action: 'reject',
+        action: 'rejectOrder',
         nextState: 'rejected',
     },
     {
         currentState: 'pendingApproval',
         role: 'any',
-        action: 'cancel',
+        action: 'cancelOrder',
         nextState: 'canceled',
     },
     {
         currentState: 'approved',
         role: 'trader',
-        action: 'place',
+        action: 'placeOrder',
         nextState: 'placed',
     },
     {
         currentState: 'approved',
         role: 'any',
-        action: 'cancel',
+        action: 'cancelOrder',
         nextState: 'canceled',
     },
     {
         currentState: 'placed',
         role: 'any',
-        action: 'cancel',
+        action: 'cancelOrder',
         nextState: 'canceled',
     },
     {
         currentState: 'rejected',
         role: 'pm',
-        action: 'update',
+        action: 'updateOrder',
         nextState: 'pendingApproval',
     },
     {
         currentState: 'rejected',
         role: 'any',
-        action: 'cancel',
+        action: 'cancelOrder',
         nextState: 'canceled',
     },
 ];
@@ -76,10 +76,10 @@ export const getAllowedActions = (
             order.status === transition.currentState &&
             (user.role === transition.role || transition.role === 'any')
         ) {
-            if (transition.action === 'update' && user.id !== order.managerId) {
+            if (transition.action === 'updateOrder' && user.id !== order.managerId) {
                 // don't allow other managers to update orders
             } else if (
-                transition.action === 'cancel' &&
+                transition.action === 'cancelOrder' &&
                 user.role === 'pm' &&
                 user.id !== order.managerId
             ) {
