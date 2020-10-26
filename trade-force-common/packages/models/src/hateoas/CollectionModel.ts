@@ -50,6 +50,7 @@ function deserialize<T>(json: any, collectionName: string): CollectionModel<T> {
     };
 }
 
+/* eslint-disable @typescript-eslint/no-redeclare */
 export const CollectionModel = {
     addLink: RepresentationModel.addLink,
     addLinks: RepresentationModel.addLinks,

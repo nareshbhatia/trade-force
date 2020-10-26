@@ -5,6 +5,7 @@ export interface RepresentationModel {
     _links: LinkMap;
 }
 
+/* eslint-disable @typescript-eslint/no-redeclare */
 export const RepresentationModel = {
     addLink: (model: RepresentationModel, relation: string, href: string) => {
         model._links[relation] = { href };

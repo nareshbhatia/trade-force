@@ -5,7 +5,12 @@ export type Side = 'buy' | 'sell';
 
 export type OrderType = 'market' | 'limit';
 
-export type OrderAction = 'approve' | 'cancel' | 'place' | 'reject' | 'update';
+export type OrderAction =
+    | 'approveOrder'
+    | 'cancelOrder'
+    | 'placeOrder'
+    | 'rejectOrder'
+    | 'updateOrder';
 
 export type OrderStatus =
     | 'new'
