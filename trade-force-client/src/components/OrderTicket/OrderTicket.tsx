@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
-import { Order, OrderSideLookup } from '@trade-force/models';
+import { EntityModel, Order, OrderSideLookup } from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { PanelHeader } from '../PanelHeader';
 import { Title } from '../Text';
@@ -33,14 +33,16 @@ export const OrderTicket = () => {
         return null;
     }
 
-    const order = orderModel.getContent();
+    const order = orderModel.entity;
     const { side } = order;
 
     const ticketClass = side === 'buy' ? classes.buyTicket : classes.sellTicket;
     const titleClass = side === 'buy' ? classes.buyText : classes.sellText;
     const title = OrderSideLookup[order.side];
 
-    const editable = order.status === 'new' || orderModel.getLink('update');
+    const editable =
+        order.status === 'new' ||
+        EntityModel.hasLink(orderModel, 'updateOrder');
 
     const handleSave = async (order: Order) => {
         console.log(order);

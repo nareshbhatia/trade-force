@@ -4,7 +4,8 @@ import { VerticalContainer } from '@react-force/core';
 import { NumberUtils } from '@react-force/number-utils';
 import { StringUtils } from '@react-force/utils';
 import {
-    OrderEntityModel,
+    EntityModel,
+    Order,
     OrderStatusLookup,
     OrderTypeLookup,
 } from '@trade-force/models';
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface OrderViewProps {
-    orderModel: OrderEntityModel;
+    orderModel: EntityModel<Order>;
 }
 
 export const OrderView = ({ orderModel }: OrderViewProps) => {
@@ -88,7 +89,7 @@ export const OrderView = ({ orderModel }: OrderViewProps) => {
         throw new Error('Error loading data');
     }
 
-    const order = orderModel.getContent();
+    const order = orderModel.entity;
 
     const {
         analystId,
@@ -178,22 +179,22 @@ export const OrderView = ({ orderModel }: OrderViewProps) => {
             )}
 
             <ActionBar>
-                {orderModel.getLink('approve') !== undefined ? (
+                {EntityModel.hasLink(orderModel, 'approveOrder') ? (
                     <ActionButton customAction={customAction}>
                         Approve
                     </ActionButton>
                 ) : null}
-                {orderModel.getLink('reject') !== undefined ? (
+                {EntityModel.hasLink(orderModel, 'rejectOrder') ? (
                     <ActionButton customAction={customAction}>
                         Reject
                     </ActionButton>
                 ) : null}
-                {orderModel.getLink('place') !== undefined ? (
+                {EntityModel.hasLink(orderModel, 'placeOrder') ? (
                     <ActionButton customAction={customAction}>
                         Place
                     </ActionButton>
                 ) : null}
-                {orderModel.getLink('cancel') !== undefined ? (
+                {EntityModel.hasLink(orderModel, 'cancelOrder') ? (
                     <ActionButton customAction={customAction}>
                         Cancel
                     </ActionButton>

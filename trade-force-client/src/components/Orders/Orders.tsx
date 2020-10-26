@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import {
-    OrderEntityModel,
     OrderSideLookup,
     OrderStatus,
     OrderStatusLookup,
@@ -143,7 +142,7 @@ export const Orders = () => {
     };
 
     const sideLegendCellClass = (params: CellClassParams) => {
-        return params.data._embedded.side === 'buy'
+        return params.data.entity.side === 'buy'
             ? classes.buyLegend
             : classes.sellLegend;
     };
@@ -151,44 +150,44 @@ export const Orders = () => {
     const sideCellClass = (params: CellClassParams) => {
         return [
             classes.side,
-            params.data._embedded.side === 'buy'
+            params.data.entity.side === 'buy'
                 ? classes.buyText
                 : classes.sellText,
         ];
     };
 
     const sideValueGetter = (params: ValueGetterParams) => {
-        return OrderSideLookup[params.data._embedded.side as Side];
+        return OrderSideLookup[params.data.entity.side as Side];
     };
 
     const securityNameValueGetter = (params: ValueGetterParams) => {
-        const id = params.data._embedded.secId;
+        const id = params.data.entity.secId;
         const security = securities?.find((security) => security.id === id);
         return security !== undefined ? security.name : id;
     };
 
     const orderTypeValueGetter = (params: ValueGetterParams) => {
-        return OrderTypeLookup[params.data._embedded.type as OrderType];
+        return OrderTypeLookup[params.data.entity.type as OrderType];
     };
 
     const orderStatusValueGetter = (params: ValueGetterParams) => {
-        return OrderStatusLookup[params.data._embedded.status as OrderStatus];
+        return OrderStatusLookup[params.data.entity.status as OrderStatus];
     };
 
     const pmValueGetter = (params: ValueGetterParams) => {
-        const id = params.data._embedded.managerId;
+        const id = params.data.entity.managerId;
         const user = users?.find((user) => user.id === id);
         return user !== undefined ? user.initials : id;
     };
 
     const paValueGetter = (params: ValueGetterParams) => {
-        const id = params.data._embedded.analystId;
+        const id = params.data.entity.analystId;
         const user = users?.find((user) => user.id === id);
         return user !== undefined ? user.initials : id;
     };
 
     const traderValueGetter = (params: ValueGetterParams) => {
-        const id = params.data._embedded.traderId;
+        const id = params.data.entity.traderId;
         const user = users?.find((user) => user.id === id);
         return user !== undefined ? user.initials : id;
     };
@@ -210,7 +209,7 @@ export const Orders = () => {
         throw new Error('Error loading data');
     }
 
-    const orderEntityModels: Array<OrderEntityModel> = orderCollectionModel.getContent();
+    const orderEntityModels = orderCollectionModel.collection;
 
     return (
         <VerticalContainer>
@@ -240,65 +239,65 @@ export const Orders = () => {
                         cellStyle={{ padding: 0 }}
                     />
                     <AgGridColumn
-                        field="_embedded.side"
+                        field="entity.side"
                         headerName="Side"
                         width={90}
                         cellClass={sideCellClass}
                         valueGetter={sideValueGetter}
                     />
                     <AgGridColumn
-                        field="_embedded.secId"
+                        field="entity.secId"
                         headerName="Symbol"
                         width={100}
                         cellClass={classes.symbol}
                     />
                     <AgGridColumn
-                        field="_embedded.secId"
+                        field="entity.secId"
                         headerName="Name"
                         width={300}
                         valueGetter={securityNameValueGetter}
                     />
                     <AgGridColumn
-                        field="_embedded.quantity"
+                        field="entity.quantity"
                         headerName="Qty"
                         width={90}
                     />
                     <AgGridColumn
-                        field="_embedded.executed"
+                        field="entity.executed"
                         headerName="Exec"
                         width={90}
                     />
                     <AgGridColumn
-                        field="_embedded.type"
+                        field="entity.type"
                         headerName="Type"
                         width={100}
                         valueGetter={orderTypeValueGetter}
                     />
                     <AgGridColumn
-                        field="_embedded.status"
+                        field="entity.status"
                         headerName="Status"
                         width={160}
                         valueGetter={orderStatusValueGetter}
                     />
                     <AgGridColumn
-                        field="_embedded.fundId"
+                        field="entity.fundId"
                         headerName="Fund"
                         width={100}
                     />
                     <AgGridColumn
-                        field="_embedded.managerId"
+                        field="entity.managerId"
                         headerName="PM"
                         width={80}
                         valueGetter={pmValueGetter}
                     />
                     <AgGridColumn
-                        field="_embedded.analystId"
+                        field="entity.analystId"
                         headerName="PA"
                         width={80}
                         valueGetter={paValueGetter}
                     />
                     <AgGridColumn
-                        field="_embedded.traderId"
+                        field="entity.traderId"
                         headerName="TR"
                         width={80}
                         valueGetter={traderValueGetter}

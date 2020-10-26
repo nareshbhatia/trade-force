@@ -1,6 +1,11 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { EntityModel, newOrder, Order } from '@trade-force/models';
+import {
+    CollectionModel,
+    EntityModel,
+    newOrder,
+    Order,
+} from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { useOrders } from '../../hooks';
 import { ActionButton } from '../ActionButton';
@@ -22,7 +27,7 @@ export const NewOrderSection = () => {
     const {
         isLoading: isOrdersLoading,
         isError: isOrdersError,
-        data: ordersModel,
+        data: orderCollectionModel,
         error: ordersError,
     } = useOrders();
 
@@ -35,13 +40,13 @@ export const NewOrderSection = () => {
         return null;
     }
 
-    if (ordersModel === undefined) {
+    if (orderCollectionModel === undefined) {
         throw new Error('Error loading data');
     }
 
     const handleNewBuy = () => {
         const order = newOrder('buy');
-        const orderModel = new EntityModel<Order>(order);
+        const orderModel = EntityModel.create<Order>(order);
         setUiState({
             ...uiState,
             isOrderTicketOpen: true,
@@ -51,7 +56,7 @@ export const NewOrderSection = () => {
 
     const handleNewSell = () => {
         const order = newOrder('sell');
-        const orderModel = new EntityModel<Order>(order);
+        const orderModel = EntityModel.create<Order>(order);
         setUiState({
             ...uiState,
             isOrderTicketOpen: true,
@@ -60,7 +65,7 @@ export const NewOrderSection = () => {
     };
 
     // Can't create orders if user doesn't have permissions
-    if (ordersModel.getLink('create') === undefined) {
+    if (!CollectionModel.hasLink(orderCollectionModel, 'createOrder')) {
         return null;
     }
 
