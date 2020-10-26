@@ -1,7 +1,7 @@
 {
   "name": "@trade-force/models",
   "description": "Domain models",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": "Naresh Bhatia",
   "license": "MIT",
   "repository": {
@@ -26,9 +26,9 @@
     "lint": "eslint '{src,test,stories}/**/*.ts*'",
     "prepublish": "yarn build",
     "start": "tsdx watch --tsconfig tsconfig.build.json --verbose --noClean",
-    "test": "echo No tests in this package",
-    "test:watch": "echo No tests in this package",
-    "test:coverage": "echo No tests in this package"
+    "test": "tsdx test",
+    "test:watch": "tsdx test --watch",
+    "test:coverage": "tsdx test --coverage --no-cache"
   },
   "dependencies": {
     "tslib": "^2.0.1",

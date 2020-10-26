@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 import { FundId, OrderId, SecId, UserId } from './Identifiers';
-import { EntityModel, CollectionModel } from './RepresentationModel';
 
 export type Side = 'buy' | 'sell';
 
@@ -32,9 +31,6 @@ export interface Order {
     traderId?: UserId;
     note: string;
 }
-
-export type OrderEntityModel = EntityModel<Order>;
-export type OrderCollectionModel = CollectionModel<OrderEntityModel>;
 
 export const newOrder = (side: Side): Order => ({
     id: uuidv4(),

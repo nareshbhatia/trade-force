@@ -1,7 +1,7 @@
 {
-  "_embedded": [
-    {
-      "_embedded": {
+  "_embedded": {
+    "orders": [
+      {
         "id": "f95244e6-1a1a-51ea-8c9a-0bca651329c6",
         "side": "buy",
         "secId": "GRMN",
@@ -11,14 +11,14 @@
         "status": "pendingApproval",
         "fundId": "TFTBM",
         "managerId": "aretha.franklin",
-        "note": ""
-      },
-      "_links": {
-        "self": { "href": "/orders/f95244e6-1a1a-51ea-8c9a-0bca651329c6" },
-        "cancel": { "href": "/orders/f95244e6-1a1a-51ea-8c9a-0bca651329c6" }
+        "note": "",
+        "_links": {
+          "self": { "href": "/orders/f95244e6-1a1a-51ea-8c9a-0bca651329c6" },
+          "cancelOrder": { "href": "/orders/f95244e6-1a1a-51ea-8c9a-0bca651329c6" }
+        }
       }
-    }
-  ],
+    ]
+  },
   "_links": {
     "self": { "href": "/orders" },
     "create": { "href": "/orders" }
