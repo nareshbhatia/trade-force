@@ -31,7 +31,7 @@
     "@react-force/number-utils": "^2.1.0",
     "@react-force/utils": "^2.3.0",
     "@react-force/web-utils": "^2.1.0",
-    "@trade-force/models": "^1.3.2",
+    "@trade-force/models": "^1.3.3",
     "ag-grid-community": "^24.1.0",
     "ag-grid-enterprise": "^24.1.0",
     "ag-grid-react": "^24.1.1",

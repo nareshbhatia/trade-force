@@ -1,11 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import {
-    CollectionModel,
-    EntityModel,
-    newOrder,
-    Order,
-} from '@trade-force/models';
+import { CollectionModel, EntityModel, Order } from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { useOrders } from '../../hooks';
 import { ActionButton } from '../ActionButton';
@@ -45,7 +40,7 @@ export const NewOrderSection = () => {
     }
 
     const handleNewBuy = () => {
-        const order = newOrder('buy');
+        const order = Order.create('buy');
         const orderModel = EntityModel.create<Order>(order);
         setUiState({
             ...uiState,
@@ -55,7 +50,7 @@ export const NewOrderSection = () => {
     };
 
     const handleNewSell = () => {
-        const order = newOrder('sell');
+        const order = Order.create('sell');
         const orderModel = EntityModel.create<Order>(order);
         setUiState({
             ...uiState,
