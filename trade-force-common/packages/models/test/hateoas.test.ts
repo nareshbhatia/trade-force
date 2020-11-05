@@ -64,7 +64,7 @@ describe('hateoas', () => {
         expect(result).toEqual(order1EntityModel);
     });
 
-    it('CollectionModel can be created from an entities', () => {
+    it('CollectionModel can be created from entities', () => {
         const result = CollectionModel.create<Order>();
 
         // Add a link

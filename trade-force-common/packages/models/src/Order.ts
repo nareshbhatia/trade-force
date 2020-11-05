@@ -37,18 +37,21 @@ export interface Order {
     note: string;
 }
 
-export const newOrder = (side: Side): Order => ({
-    id: uuidv4(),
-    side,
-    secId: '',
-    quantity: 0,
-    executed: 0,
-    type: 'market',
-    status: 'new',
-    fundId: '',
-    managerId: '',
-    note: '',
-});
+/* eslint-disable @typescript-eslint/no-redeclare */
+export const Order = {
+    create: (side: Side): Order => ({
+        id: uuidv4(),
+        side,
+        secId: '',
+        quantity: 0,
+        executed: 0,
+        type: 'market',
+        status: 'new',
+        fundId: '',
+        managerId: '',
+        note: '',
+    }),
+};
 
 // Lookups
 export const OrderSideLookup: { [key in Side]: string } = {
