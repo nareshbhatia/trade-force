@@ -1,4 +1,5 @@
-import { CollectionModel, EntityModel, Order, User } from '@trade-force/models';
+import { CollectionModel, EntityModel } from '@http-utils/hateoas';
+import { Order, User } from '@trade-force/models';
 import axios from 'axios';
 import { injectable } from 'inversify';
 import { getAllowedActions } from './OrderStateTable';

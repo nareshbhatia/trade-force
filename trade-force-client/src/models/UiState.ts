@@ -1,4 +1,5 @@
-import { EntityModel, Order } from '@trade-force/models';
+import { EntityModel } from '@http-utils/hateoas';
+import { Order } from '@trade-force/models';
 
 export interface UiState {
     isOrderTicketOpen: boolean;

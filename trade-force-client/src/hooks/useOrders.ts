@@ -1,4 +1,5 @@
-import { CollectionModel, Order } from '@trade-force/models';
+import { CollectionModel } from '@http-utils/hateoas';
+import { Order } from '@trade-force/models';
 import { useQuery } from 'react-query';
 import { tfApi } from '../utils';
 

@@ -1,5 +1,6 @@
+import { CollectionModel } from '@http-utils/hateoas';
 import { HttpStatusCode } from '@react-force/http-utils';
-import { CollectionModel, Order, UserId } from '@trade-force/models';
+import { Order, UserId } from '@trade-force/models';
 import express from 'express';
 import { inject } from 'inversify';
 import {

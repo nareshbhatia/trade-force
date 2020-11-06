@@ -1,7 +1,8 @@
 import React from 'react';
+import { EntityModel } from '@http-utils/hateoas';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
-import { EntityModel, Order, OrderSideLookup } from '@trade-force/models';
+import { Order, OrderSideLookup } from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { PanelHeader } from '../PanelHeader';
 import { Title } from '../Text';

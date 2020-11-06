@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
+import { CollectionModel, EntityModel } from '@http-utils/hateoas';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { CollectionModel, EntityModel, Order } from '@trade-force/models';
+import { Order } from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { useOrders } from '../../hooks';
 import { ActionButton } from '../ActionButton';

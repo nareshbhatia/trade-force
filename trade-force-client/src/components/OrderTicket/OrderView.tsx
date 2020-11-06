@@ -1,14 +1,10 @@
 import React, { Fragment } from 'react';
+import { EntityModel } from '@http-utils/hateoas';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import { NumberUtils } from '@react-force/number-utils';
 import { StringUtils } from '@react-force/utils';
-import {
-    EntityModel,
-    Order,
-    OrderStatusLookup,
-    OrderTypeLookup,
-} from '@trade-force/models';
+import { Order, OrderStatusLookup, OrderTypeLookup } from '@trade-force/models';
 import classNames from 'classnames';
 import { useSecurities, useUsers } from '../../hooks';
 import { ActionBar } from '../ActionBar';

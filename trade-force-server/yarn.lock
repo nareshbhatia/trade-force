@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@http-utils/hateoas@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@http-utils/hateoas/-/hateoas-1.0.0.tgz#dae48a226c2fd4806f2a8a399a5bb04050e18dac"
+  integrity sha512-3lVdTlh6DzhFoVSq9znQuf+CWUPcoemi/rl0JKYHgKZkUrtIoOdHYZkTLf+JYj+jv3FW+LPWQv7v+nmDvC+nQQ==
+  dependencies:
+    tslib "^2.0.3"
+
 "@react-force/http-utils@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@react-force/http-utils/-/http-utils-1.2.0.tgz#08d2d812888676f6b6d9b48b0f5c5a33e8984226"
@@ -36,10 +43,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@trade-force/models@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@trade-force/models/-/models-1.3.2.tgz#c6fd6a2e98cc42ae99112f9e0ccdf85e9d805204"
-  integrity sha512-LyQilzwhJXQ0Ea1xaxjXb9gTY573zkPUIc5lNOgHBJZEChwNUpwro19tyZExEb0UxnyNNTWYTCSukmET9gu2Bg==
+"@trade-force/models@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@trade-force/models/-/models-1.4.0.tgz#0b4e08f5081fc4df3dbf72dbf7063c850c772665"
+  integrity sha512-dCuQyHCOoOYQ8bi28zGZm9xNfKZvrt2AoWWyC3oYEMS3qPDIjn1w3YOw/svsgSJ0sKj2NUkIbHmb2hyfgGBBYw==
   dependencies:
     tslib "^2.0.1"
     uuid "^8.3.0"
@@ -91,9 +98,9 @@
   integrity sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
 
 "@types/node@*", "@types/node@^14.11.2":
-  version "14.14.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.3.tgz#e1c09064121f894baaad2bd9f12ce4a41bffb274"
-  integrity sha512-33/L34xS7HVUx23e0wOT2V1qPF1IrHgQccdJVm9uXGTB9vFBrrzBtkQymT8VskeKOxjz55MSqMv0xuLq+u98WQ==
+  version "14.14.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.6.tgz#146d3da57b3c636cc0d1769396ce1cfa8991147f"
+  integrity sha512-6QlRuqsQ/Ox/aJEQWBEJG7A9+u7oSYl3mem/K8IzxXG/kAGbV1YPD9Bg9Zw3vyxC/YP+zONKwy8hGkSt1jxFMw==
 
 "@types/qs@*":
   version "6.9.5"
@@ -1709,7 +1716,7 @@ ts-node@^9.0.0:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
-tslib@^2.0.0, tslib@^2.0.1:
+tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==
@@ -1735,9 +1742,9 @@ typedarray-to-buffer@^3.1.5:
     is-typedarray "^1.0.0"
 
 typescript@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
-  integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.5.tgz#ae9dddfd1069f1cb5beb3ef3b2170dd7c1332389"
+  integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
 
 undefsafe@^2.0.3:
   version "2.0.3"
