@@ -34,7 +34,6 @@
     "@react-force/web-utils": "^2.1.0",
     "@trade-force/models": "^1.4.0",
     "ag-grid-community": "^25.0.0",
-    "ag-grid-enterprise": "^25.0.0",
     "ag-grid-react": "^25.0.0",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",

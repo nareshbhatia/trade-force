@@ -18,7 +18,6 @@ import {
     ValueGetterParams,
 } from 'ag-grid-community';
 import { CellPosition } from 'ag-grid-community/dist/lib/entities/cellPosition';
-import 'ag-grid-enterprise';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import classNames from 'classnames';
 import { useUiState, useUiStateSetter } from '../../contexts';
