@@ -15,8 +15,5 @@ const fetchActions = async (): Promise<EntityModel<Object>> => {
  * Hook to fetch allowed actions from server
  */
 export const useActions = () => {
-    return useQuery<EntityModel<Object>, 'actions'>('actions', fetchActions, {
-        refetchOnWindowFocus: false,
-        staleTime: Infinity,
-    });
+    return useQuery<EntityModel<Object>, 'actions'>('actions', fetchActions);
 };

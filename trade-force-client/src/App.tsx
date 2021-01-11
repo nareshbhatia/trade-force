@@ -19,7 +19,7 @@ import { viewMap } from './viewMap';
 const rootStore = initApp();
 const { routerStore } = rootStore;
 
-// Observer theme changes
+// Observe theme changes
 export const App = observer(() => {
     return (
         <ErrorBoundary>

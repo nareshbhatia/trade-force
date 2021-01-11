@@ -1,26 +1,32 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
+import React, { MouseEvent } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 import {
-    HorizontalContainer,
-    NarrowContainer,
+    useMessageSetter,
     VerticalContainer,
     ViewVerticalContainer,
 } from '@react-force/core';
-import { Form, Formik } from 'formik';
-import * as yup from 'yup';
 import { MessageFactory } from '@react-force/models';
-import { TextField } from '@react-force/formik-mui';
+import { UserRoleLookup } from '@trade-force/models';
 import { Header } from '../../components';
-import { useMessageSetter } from '@react-force/core';
 import { useRootStore } from '../../contexts';
 import { useUsers } from '../../hooks';
-import { SignInHelp } from './SignInHelp';
 
 const useStyles = makeStyles((theme: Theme) => ({
-    form: {
-        padding: theme.spacing(1),
+    title: {
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(1),
+    },
+    table: {
+        width: 460,
+    },
+    row: {
+        cursor: 'pointer',
     },
 }));
 
@@ -31,24 +37,17 @@ export const SignInPage = () => {
     const { authStore } = rootStore;
     const setMessage = useMessageSetter();
 
-    const validationSchema = yup.object().shape({
-        id: yup.string().required(),
-    });
+    const handleClick = (e: MouseEvent) => {
+        const selectedId = e.currentTarget.getAttribute('data-userid');
+        const user = users?.find((user) => user.id === selectedId);
 
-    const handleSubmit = async (id: string) => {
-        try {
-            const user = users?.find((user) => user.id === id);
-
-            if (user === undefined) {
-                setMessage(MessageFactory.error('Invalid ID'));
-                return;
-            }
-
-            // Save user
-            authStore.setUser(user);
-        } catch (error) {
-            setMessage(MessageFactory.error(error.message));
+        if (user === undefined) {
+            setMessage(MessageFactory.error('Invalid ID'));
+            return;
         }
+
+        // Save user
+        authStore.setUser(user);
     };
 
     // Allow ErrorBoundary to handle errors
@@ -63,42 +62,42 @@ export const SignInPage = () => {
     return (
         <ViewVerticalContainer>
             <Header />
-            <HorizontalContainer flexWrap="wrap">
-                <SignInHelp users={users} />
-                <VerticalContainer>
-                    <NarrowContainer textAlign="center">
-                        <Formik
-                            initialValues={{ id: '' }}
-                            validationSchema={validationSchema}
-                            onSubmit={async (values, actions) => {
-                                await handleSubmit(values.id);
-                                actions.setSubmitting(false);
-                            }}
-                        >
-                            {() => (
-                                <Form className={classes.form}>
-                                    <TextField
-                                        name="id"
-                                        label="User ID"
-                                        margin="normal"
-                                        fullWidth
-                                    />
-
-                                    <Box mt={2}>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            type="submit"
-                                        >
-                                            Sign In
-                                        </Button>
-                                    </Box>
-                                </Form>
-                            )}
-                        </Formik>
-                    </NarrowContainer>
-                </VerticalContainer>
-            </HorizontalContainer>
+            <VerticalContainer mx={4}>
+                <Typography
+                    component="h1"
+                    variant="h5"
+                    className={classes.title}
+                >
+                    Select a user
+                </Typography>
+                <Table size="small" className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>User ID</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Role</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {users.map((user) => (
+                            <TableRow
+                                key={user.id}
+                                data-userid={user.id}
+                                data-testid="user-row"
+                                className={classes.row}
+                                hover
+                                onClick={handleClick}
+                            >
+                                <TableCell>{user.id}</TableCell>
+                                <TableCell>{user.displayName}</TableCell>
+                                <TableCell>
+                                    {UserRoleLookup[user.role]}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </VerticalContainer>
         </ViewVerticalContainer>
     );
 };
