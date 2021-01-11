@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@http-utils/core';
+import { EntityModel } from '@http-utils/hateoas';
 import { UserId } from '@trade-force/models';
 import express from 'express';
 import { inject } from 'inversify';
@@ -10,17 +11,14 @@ import {
     response,
 } from 'inversify-express-utils';
 import { TYPES, USER_ID_HEADER } from '../constants';
-import { OrderService, UserService } from '../services';
+import { UserService } from '../services';
 
-@controller('/orders')
-export class OrderController {
-    constructor(
-        @inject(TYPES.OrderService) private orderService: OrderService,
-        @inject(TYPES.UserService) private userService: UserService
-    ) {}
+@controller('/actions')
+export class ActionController {
+    constructor(@inject(TYPES.UserService) private userService: UserService) {}
 
     @httpGet('/')
-    public async getOrders(
+    public async getActions(
         @request() req: express.Request,
         @requestHeaders(USER_ID_HEADER) userId: UserId,
         @response() res: express.Response
@@ -38,19 +36,11 @@ export class OrderController {
             return;
         }
 
-        // extract query parameters from url
-        const url = req.originalUrl;
-        const i = url.indexOf('?');
-        const queryParam = i >= 0 ? url.substr(i + 1) : '';
+        const actionModel = new EntityModel<Object>({});
+        if (user.role === 'pm') {
+            actionModel.addLink('createOrder', '/orders');
+        }
 
-        // fetch orders (passing query parameters) and return in response
-        const orderCollectionWrapper = await this.orderService.getOrders(
-            user,
-            queryParam
-        );
-        const { collectionModel, totalCount } = orderCollectionWrapper;
-        res.status(HttpStatusCode.Ok)
-            .header('X-Total-Count', totalCount)
-            .send(collectionModel.serialize('orders'));
+        res.status(HttpStatusCode.Ok).send(actionModel.serialize());
     }
 }

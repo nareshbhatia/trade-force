@@ -1,7 +1,7 @@
 import { Fund } from '@trade-force/models';
 import { inject } from 'inversify';
-import { controller, httpGet, queryParam } from 'inversify-express-utils';
-import TYPES from '../constants/types';
+import { controller, httpGet } from 'inversify-express-utils';
+import { TYPES } from '../constants';
 import { FundService } from '../services';
 
 @controller('/funds')

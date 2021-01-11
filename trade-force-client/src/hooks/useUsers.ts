@@ -1,13 +1,14 @@
 import { User } from '@trade-force/models';
+import axios from 'axios';
 import { useQuery } from 'react-query';
-import { tfApi } from '../utils';
+import { ApiPath } from '../utils';
 
 /**
  * Fetches users from server
  */
 const fetchUsers = async (): Promise<Array<User>> => {
     // get users
-    const resp = await tfApi.get('/users');
+    const resp = await axios.get(ApiPath.users);
     const users: Array<User> = resp.data;
 
     // Sort by role then display name

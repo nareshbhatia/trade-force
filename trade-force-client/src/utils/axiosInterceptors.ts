@@ -2,11 +2,15 @@ import { WindowEnv } from '@react-force/models';
 import axios from 'axios';
 import { EnvVar } from './constants';
 
+const env = new WindowEnv();
+const baseURL = env.get(EnvVar.API_URL);
+
 const USER_ID_HEADER = 'Trade-Force-User';
 
+// ----- Trade Force User Id -----
 let tfUserId: string | undefined;
 
-export const TfApiHelpers = {
+export const UserIdHelper = {
     setUserId: (userId: string) => {
         tfUserId = userId;
     },
@@ -15,14 +19,12 @@ export const TfApiHelpers = {
         tfUserId = undefined;
     },
 };
-// initialize tfApi
-const env = new WindowEnv();
-export const tfApi = axios.create({
-    baseURL: env.get(EnvVar.API_URL),
-});
 
-// interceptor to inject headers
-tfApi.interceptors.request.use(async (config) => {
+// ----- Axios interceptor to configure all requests -----
+axios.interceptors.request.use(async (config) => {
+    // configure baseURL
+    config.baseURL = baseURL;
+
     // add userId header
     if (tfUserId !== undefined) {
         config.headers[USER_ID_HEADER] = tfUserId;

@@ -76,7 +76,10 @@ export const getAllowedActions = (
             order.status === transition.currentState &&
             (user.role === transition.role || transition.role === 'any')
         ) {
-            if (transition.action === 'updateOrder' && user.id !== order.managerId) {
+            if (
+                transition.action === 'updateOrder' &&
+                user.id !== order.managerId
+            ) {
                 // don't allow other managers to update orders
             } else if (
                 transition.action === 'cancelOrder' &&

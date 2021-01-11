@@ -1,5 +1,4 @@
 import React from 'react';
-import { EntityModel } from '@http-utils/hateoas';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import { Order, OrderSideLookup } from '@trade-force/models';
@@ -42,8 +41,7 @@ export const OrderTicket = () => {
     const title = OrderSideLookup[order.side];
 
     const editable =
-        order.status === 'new' ||
-        EntityModel.hasLink(orderModel, 'updateOrder');
+        order.status === 'new' || orderModel.hasLink('updateOrder');
 
     const handleSave = async (order: Order) => {
         console.log(order);

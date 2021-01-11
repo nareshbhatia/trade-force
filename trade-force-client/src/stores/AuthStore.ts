@@ -1,7 +1,7 @@
 import { User } from '@trade-force/models';
 import { action, decorate, observable } from 'mobx';
 import { createRouterState } from 'mobx-state-router';
-import { TfApiHelpers } from '../utils';
+import { UserIdHelper } from '../utils';
 import { RootStore } from './RootStore';
 
 const home = createRouterState('home');
@@ -17,13 +17,13 @@ export class AuthStore {
 
     setUser = (user: User) => {
         this.user = user;
-        TfApiHelpers.setUserId(user.id);
+        UserIdHelper.setUserId(user.id);
         this.rootStore.routerStore.goToState(home);
     };
 
     clearUser = () => {
         this.user = undefined;
-        TfApiHelpers.clearUserId();
+        UserIdHelper.clearUserId();
         this.rootStore.routerStore.goToState(signin);
     };
 

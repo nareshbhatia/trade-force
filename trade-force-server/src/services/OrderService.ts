@@ -6,34 +6,43 @@ import { getAllowedActions } from './OrderStateTable';
 
 const apiUrl = process.env.JSON_SERVER_URL;
 
+export interface OrderCollectionWrapper {
+    collectionModel: CollectionModel<Order>;
+    totalCount: string;
+}
+
 @injectable()
 export class OrderService {
-    public async getOrders(user: User): Promise<CollectionModel<Order>> {
-        const resp = await axios.get(`${apiUrl}/orders`);
+    public async getOrders(
+        user: User,
+        queryParam: string
+    ): Promise<OrderCollectionWrapper> {
+        const resp = await axios.get(`${apiUrl}/orders?${queryParam}`);
         const orders: Array<Order> = resp.data;
+        const totalCount = resp.headers['x-total-count'];
 
         // create an empty collectionModel
-        const collectionModel = CollectionModel.create<Order>();
+        const collectionModel = new CollectionModel<Order>();
 
         // add entityModels
         orders.map((order) => {
-            const entityModel = EntityModel.create<Order>(order);
+            const entityModel = new EntityModel<Order>(order);
 
             // add links to entityModel
-            EntityModel.addLink(entityModel, 'self', `/orders/${order.id}`);
+            entityModel.addLink('self', `/orders/${order.id}`);
             getAllowedActions(order, user).forEach((action) => {
-                EntityModel.addLink(entityModel, action, `/orders/${order.id}`);
+                entityModel.addLink(action, `/orders/${order.id}`);
             });
 
-            CollectionModel.addEntityModel<Order>(collectionModel, entityModel);
+            collectionModel.addEntityModel(entityModel);
         });
 
         // add links to collectionModel
-        CollectionModel.addLink(collectionModel, 'self', '/orders');
-        if (user.role === 'pm') {
-            CollectionModel.addLink(collectionModel, 'createOrder', '/orders');
-        }
+        collectionModel.addLink('self', '/orders');
 
-        return collectionModel;
+        return {
+            collectionModel,
+            totalCount,
+        };
     }
 }

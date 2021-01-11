@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { CollectionModel, EntityModel } from '@http-utils/hateoas';
+import { EntityModel } from '@http-utils/hateoas';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Order } from '@trade-force/models';
 import { useUiState, useUiStateSetter } from '../../contexts';
-import { useOrders } from '../../hooks';
+import { useActions } from '../../hooks';
 import { ActionButton } from '../ActionButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -21,28 +21,28 @@ export const NewOrderSection = () => {
     const setUiState = useUiStateSetter();
 
     const {
-        isLoading: isOrdersLoading,
-        isError: isOrdersError,
-        data: orderCollectionModel,
-        error: ordersError,
-    } = useOrders();
+        isLoading: isActionsLoading,
+        isError: isActionsError,
+        data: actionsModel,
+        error: actionsError,
+    } = useActions();
 
     // Allow ErrorBoundary to handle errors
-    if (isOrdersError) {
-        throw ordersError;
+    if (isActionsError) {
+        throw actionsError;
     }
 
-    if (isOrdersLoading) {
+    if (isActionsLoading) {
         return null;
     }
 
-    if (orderCollectionModel === undefined) {
+    if (actionsModel === undefined) {
         throw new Error('Error loading data');
     }
 
     const handleNewBuy = () => {
         const order = Order.create('buy');
-        const orderModel = EntityModel.create<Order>(order);
+        const orderModel = new EntityModel<Order>(order);
         setUiState({
             ...uiState,
             isOrderTicketOpen: true,
@@ -52,7 +52,7 @@ export const NewOrderSection = () => {
 
     const handleNewSell = () => {
         const order = Order.create('sell');
-        const orderModel = EntityModel.create<Order>(order);
+        const orderModel = new EntityModel<Order>(order);
         setUiState({
             ...uiState,
             isOrderTicketOpen: true,
@@ -61,7 +61,7 @@ export const NewOrderSection = () => {
     };
 
     // Can't create orders if user doesn't have permissions
-    if (!CollectionModel.hasLink(orderCollectionModel, 'createOrder')) {
+    if (!actionsModel.hasLink('createOrder')) {
         return null;
     }
 

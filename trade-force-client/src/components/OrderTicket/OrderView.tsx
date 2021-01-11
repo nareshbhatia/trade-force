@@ -175,22 +175,22 @@ export const OrderView = ({ orderModel }: OrderViewProps) => {
             )}
 
             <ActionBar>
-                {EntityModel.hasLink(orderModel, 'approveOrder') ? (
+                {orderModel.hasLink('approveOrder') ? (
                     <ActionButton customAction={customAction}>
                         Approve
                     </ActionButton>
                 ) : null}
-                {EntityModel.hasLink(orderModel, 'rejectOrder') ? (
+                {orderModel.hasLink('rejectOrder') ? (
                     <ActionButton customAction={customAction}>
                         Reject
                     </ActionButton>
                 ) : null}
-                {EntityModel.hasLink(orderModel, 'placeOrder') ? (
+                {orderModel.hasLink('placeOrder') ? (
                     <ActionButton customAction={customAction}>
                         Place
                     </ActionButton>
                 ) : null}
-                {EntityModel.hasLink(orderModel, 'cancelOrder') ? (
+                {orderModel.hasLink('cancelOrder') ? (
                     <ActionButton customAction={customAction}>
                         Cancel
                     </ActionButton>

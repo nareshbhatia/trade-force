@@ -16,7 +16,8 @@ import express from 'express';
 import { createServer } from 'http';
 import { Container } from 'inversify';
 import { InversifyExpressServer } from 'inversify-express-utils';
-import TYPES from './constants/types';
+import { TYPES } from './constants';
+import './controllers/ActionController';
 import './controllers/FundController';
 import './controllers/OrderController';
 import './controllers/SecurityController';
@@ -41,7 +42,7 @@ const inversifyServer = new InversifyExpressServer(container);
 // configure middleware into the express app
 inversifyServer.setConfig((app) => {
     // Add middleware to enable CORS
-    app.use(cors());
+    app.use(cors({ exposedHeaders: 'X-Total-Count' }));
 
     // Add middleware to parse the POST data of the body
     app.use(bodyParser.urlencoded({ extended: true }));
