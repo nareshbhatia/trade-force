@@ -11,6 +11,7 @@ import {
 } from '@trade-force/models';
 import {
     CellClassParams,
+    ColDef,
     GridApi,
     GridReadyEvent,
     RowSelectedEvent,
@@ -18,7 +19,7 @@ import {
     ValueGetterParams,
 } from 'ag-grid-community';
 import { CellPosition } from 'ag-grid-community/dist/lib/entities/cellPosition';
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import classNames from 'classnames';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { useSecurities, useUsers } from '../../hooks';
@@ -227,6 +228,80 @@ export const Orders = () => {
         throw new Error('Error loading data');
     }
 
+    const columnDefs: Array<ColDef> = [
+        {
+            width: 12,
+            minWidth: 12,
+            cellClass: sideLegendCellClass,
+            // padding must be set using cellStyle, not cellClass
+            cellStyle: { padding: 0 },
+        },
+        {
+            field: 'entity.side',
+            headerName: 'Side',
+            width: 90,
+            cellClass: sideCellClass,
+            valueGetter: sideValueGetter,
+        },
+        {
+            field: 'entity.secId',
+            headerName: 'Symbol',
+            width: 100,
+            cellClass: classes.symbol,
+        },
+        {
+            field: 'entity.secId',
+            headerName: 'Name',
+            width: 300,
+            valueGetter: securityNameValueGetter,
+        },
+        {
+            field: 'entity.quantity',
+            headerName: 'Qty',
+            width: 90,
+        },
+        {
+            field: 'entity.executed',
+            headerName: 'Exec',
+            width: 90,
+        },
+        {
+            field: 'entity.type',
+            headerName: 'Type',
+            width: 100,
+            valueGetter: orderTypeValueGetter,
+        },
+        {
+            field: 'entity.status',
+            headerName: 'Status',
+            width: 160,
+            valueGetter: orderStatusValueGetter,
+        },
+        {
+            field: 'entity.fundId',
+            headerName: 'Fund',
+            width: 100,
+        },
+        {
+            field: 'entity.managerId',
+            headerName: 'PM',
+            width: 80,
+            valueGetter: pmValueGetter,
+        },
+        {
+            field: 'entity.analystId',
+            headerName: 'PA',
+            width: 80,
+            valueGetter: paValueGetter,
+        },
+        {
+            field: 'entity.traderId',
+            headerName: 'TR',
+            width: 80,
+            valueGetter: traderValueGetter,
+        },
+    ];
+
     return (
         <VerticalContainer>
             <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
@@ -238,6 +313,7 @@ export const Orders = () => {
                         sortable: true,
                         filter: true,
                     }}
+                    columnDefs={columnDefs}
                     gridOptions={{
                         rowHeight: 36,
                         suppressCellSelection: true,
@@ -247,79 +323,7 @@ export const Orders = () => {
                     }}
                     onGridReady={handleGridReady}
                     onRowSelected={handleRowSelected}
-                >
-                    <AgGridColumn
-                        width={12}
-                        minWidth={12}
-                        cellClass={sideLegendCellClass}
-                        // padding must be set using cellStyle, not cellClass
-                        cellStyle={{ padding: 0 }}
-                    />
-                    <AgGridColumn
-                        field="entity.side"
-                        headerName="Side"
-                        width={90}
-                        cellClass={sideCellClass}
-                        valueGetter={sideValueGetter}
-                    />
-                    <AgGridColumn
-                        field="entity.secId"
-                        headerName="Symbol"
-                        width={100}
-                        cellClass={classes.symbol}
-                    />
-                    <AgGridColumn
-                        field="entity.secId"
-                        headerName="Name"
-                        width={300}
-                        valueGetter={securityNameValueGetter}
-                    />
-                    <AgGridColumn
-                        field="entity.quantity"
-                        headerName="Qty"
-                        width={90}
-                    />
-                    <AgGridColumn
-                        field="entity.executed"
-                        headerName="Exec"
-                        width={90}
-                    />
-                    <AgGridColumn
-                        field="entity.type"
-                        headerName="Type"
-                        width={100}
-                        valueGetter={orderTypeValueGetter}
-                    />
-                    <AgGridColumn
-                        field="entity.status"
-                        headerName="Status"
-                        width={160}
-                        valueGetter={orderStatusValueGetter}
-                    />
-                    <AgGridColumn
-                        field="entity.fundId"
-                        headerName="Fund"
-                        width={100}
-                    />
-                    <AgGridColumn
-                        field="entity.managerId"
-                        headerName="PM"
-                        width={80}
-                        valueGetter={pmValueGetter}
-                    />
-                    <AgGridColumn
-                        field="entity.analystId"
-                        headerName="PA"
-                        width={80}
-                        valueGetter={paValueGetter}
-                    />
-                    <AgGridColumn
-                        field="entity.traderId"
-                        headerName="TR"
-                        width={80}
-                        valueGetter={traderValueGetter}
-                    />
-                </AgGridReact>
+                />
             </div>
         </VerticalContainer>
     );
