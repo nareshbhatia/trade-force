@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { VerticalContainer } from '@react-force/core';
 import {
@@ -12,27 +12,18 @@ import {
 import {
     CellClassParams,
     ColDef,
-    GridApi,
-    GridReadyEvent,
     RowSelectedEvent,
-    NavigateToNextCellParams,
     ValueGetterParams,
 } from 'ag-grid-community';
-import { CellPosition } from 'ag-grid-community/dist/lib/entities/cellPosition';
-import { AgGridReact } from 'ag-grid-react';
-import classNames from 'classnames';
 import { useUiState, useUiStateSetter } from '../../contexts';
 import { useSecurities, useUsers } from '../../hooks';
+import { CustomGrid } from '../CustomGrid';
 import { PanelHeader } from '../PanelHeader';
 import { getDatasource } from './getDatasource';
 
 const useStyles = makeStyles((theme: Theme) => ({
     panelHeader: {
         height: 52,
-    },
-    grid: {
-        height: '100%',
-        width: '100%',
     },
     buyLegend: {
         backgroundColor: theme.palette.business.buyLegend,
@@ -65,10 +56,6 @@ export const Orders = () => {
     const uiState = useUiState();
     const setUiState = useUiStateSetter();
 
-    // use useRef instead of useState to avoid a stale closure
-    // see https://stackoverflow.com/questions/64071586/
-    const gridApiRef = useRef<GridApi>();
-
     const {
         isLoading: isSecuritiesLoading,
         isError: isSecuritiesError,
@@ -80,10 +67,6 @@ export const Orders = () => {
         data: users,
     } = useUsers();
 
-    const handleGridReady = (event: GridReadyEvent) => {
-        gridApiRef.current = event.api;
-    };
-
     const handleRowSelected = (event: RowSelectedEvent) => {
         if (event.node.isSelected()) {
             setUiState({
@@ -91,49 +74,6 @@ export const Orders = () => {
                 isOrderTicketOpen: true,
                 targetOrder: event.node.data,
             });
-        }
-    };
-
-    const handleKeyboardNavigation = (
-        params: NavigateToNextCellParams
-    ): CellPosition => {
-        const gridApi = gridApiRef.current;
-        if (gridApi === undefined) {
-            throw new Error('This should never happen!');
-        }
-
-        let previousCell = params.previousCellPosition;
-        const suggestedNextCell = params.nextCellPosition;
-
-        const KEY_UP = 38;
-        const KEY_DOWN = 40;
-        const KEY_LEFT = 37;
-        const KEY_RIGHT = 39;
-
-        switch (params.key) {
-            case KEY_DOWN:
-                previousCell = params.previousCellPosition;
-                // set selected cell on current cell + 1
-                gridApi.forEachNode(function (node) {
-                    if (previousCell.rowIndex + 1 === node.rowIndex) {
-                        node.setSelected(true);
-                    }
-                });
-                return suggestedNextCell ? suggestedNextCell : previousCell;
-            case KEY_UP:
-                previousCell = params.previousCellPosition;
-                // set selected cell on current cell - 1
-                gridApi.forEachNode(function (node) {
-                    if (previousCell.rowIndex - 1 === node.rowIndex) {
-                        node.setSelected(true);
-                    }
-                });
-                return suggestedNextCell ? suggestedNextCell : previousCell;
-            case KEY_LEFT:
-            case KEY_RIGHT:
-                return suggestedNextCell ? suggestedNextCell : previousCell;
-            default:
-                throw new Error('This should never happen!');
         }
     };
 
@@ -305,26 +245,11 @@ export const Orders = () => {
     return (
         <VerticalContainer>
             <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
-            <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
-                <AgGridReact
-                    rowSelection={'single'}
-                    defaultColDef={{
-                        resizable: true,
-                        sortable: true,
-                        filter: true,
-                    }}
-                    columnDefs={columnDefs}
-                    gridOptions={{
-                        rowHeight: 36,
-                        suppressCellSelection: true,
-                        navigateToNextCell: handleKeyboardNavigation,
-                        rowModelType: 'infinite',
-                        datasource: getDatasource(),
-                    }}
-                    onGridReady={handleGridReady}
-                    onRowSelected={handleRowSelected}
-                />
-            </div>
+            <CustomGrid
+                columnDefs={columnDefs}
+                datasource={getDatasource()}
+                onRowSelected={handleRowSelected}
+            />
         </VerticalContainer>
     );
 };
