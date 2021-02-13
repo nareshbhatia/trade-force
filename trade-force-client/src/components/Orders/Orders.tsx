@@ -13,6 +13,7 @@ import {
     CellClassParams,
     ColDef,
     RowSelectedEvent,
+    ValueFormatterParams,
     ValueGetterParams,
 } from 'ag-grid-community';
 import { useUiState, useUiStateSetter } from '../../contexts';
@@ -105,6 +106,13 @@ export const Orders = () => {
         return OrderSideLookup[params.data.entity.side as Side];
     };
 
+    const sideValueFormatter = (params: ValueFormatterParams) => {
+        if (params.value === undefined) {
+            return null;
+        }
+        return OrderSideLookup[params.value as Side];
+    };
+
     const securityNameValueGetter = (params: ValueGetterParams) => {
         if (params.data === undefined) {
             return null;
@@ -121,11 +129,25 @@ export const Orders = () => {
         return OrderTypeLookup[params.data.entity.type as OrderType];
     };
 
+    const orderTypeValueFormatter = (params: ValueFormatterParams) => {
+        if (params.value === undefined) {
+            return null;
+        }
+        return OrderTypeLookup[params.value as OrderType];
+    };
+
     const orderStatusValueGetter = (params: ValueGetterParams) => {
         if (params.data === undefined) {
             return null;
         }
         return OrderStatusLookup[params.data.entity.status as OrderStatus];
+    };
+
+    const orderStatusValueFormatter = (params: ValueFormatterParams) => {
+        if (params.value === undefined) {
+            return null;
+        }
+        return OrderStatusLookup[params.value as OrderStatus];
     };
 
     const pmValueGetter = (params: ValueGetterParams) => {
@@ -182,6 +204,12 @@ export const Orders = () => {
             width: 90,
             cellClass: sideCellClass,
             valueGetter: sideValueGetter,
+            filter: 'agSetColumnFilter',
+            filterParams: {
+                values: Object.keys(OrderSideLookup),
+                defaultToNothingSelected: true,
+                valueFormatter: sideValueFormatter,
+            },
         },
         {
             field: 'entity.secId',
@@ -193,6 +221,10 @@ export const Orders = () => {
             field: 'entity.secId',
             headerName: 'Name',
             width: 300,
+            // can't sort or filter by name because it is not a property of order
+            sortable: false,
+            filter: false,
+            menuTabs: [],
             valueGetter: securityNameValueGetter,
         },
         {
@@ -210,12 +242,24 @@ export const Orders = () => {
             headerName: 'Type',
             width: 100,
             valueGetter: orderTypeValueGetter,
+            filter: 'agSetColumnFilter',
+            filterParams: {
+                values: Object.keys(OrderTypeLookup),
+                defaultToNothingSelected: true,
+                valueFormatter: orderTypeValueFormatter,
+            },
         },
         {
             field: 'entity.status',
             headerName: 'Status',
             width: 160,
             valueGetter: orderStatusValueGetter,
+            filter: 'agSetColumnFilter',
+            filterParams: {
+                values: Object.keys(OrderStatusLookup),
+                defaultToNothingSelected: true,
+                valueFormatter: orderStatusValueFormatter,
+            },
         },
         {
             field: 'entity.fundId',

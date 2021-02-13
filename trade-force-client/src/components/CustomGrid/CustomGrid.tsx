@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+    CellPosition,
     ColDef,
     GridApi,
     GridReadyEvent,
@@ -8,7 +9,7 @@ import {
     NavigateToNextCellParams,
     IDatasource,
 } from 'ag-grid-community';
-import { CellPosition } from 'ag-grid-community/dist/lib/entities/cellPosition';
+import 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 import classNames from 'classnames';
 
@@ -83,23 +84,34 @@ export const CustomGrid = ({
         }
     };
 
+    const defaultColDef = {
+        resizable: true,
+        sortable: true,
+        // infinite row model can't use the default agSetColumnFilter because
+        // all column values are not known. Hence set default to
+        filter: 'agTextColumnFilter',
+        filterParams: {
+            filterOptions: ['equals'],
+            buttons: ['apply', 'reset'],
+        },
+        menuTabs: ['filterMenuTab'],
+    };
+
+    const gridOptions = {
+        rowHeight: 36,
+        suppressCellSelection: true,
+        navigateToNextCell: handleKeyboardNavigation,
+        rowModelType: 'infinite',
+        datasource,
+    };
+
     return (
         <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
             <AgGridReact
                 rowSelection="single"
-                defaultColDef={{
-                    resizable: true,
-                    sortable: true,
-                    filter: true,
-                }}
+                defaultColDef={defaultColDef}
                 columnDefs={columnDefs}
-                gridOptions={{
-                    rowHeight: 36,
-                    suppressCellSelection: true,
-                    navigateToNextCell: handleKeyboardNavigation,
-                    rowModelType: 'infinite',
-                    datasource,
-                }}
+                gridOptions={gridOptions}
                 onGridReady={handleGridReady}
                 onRowSelected={onRowSelected}
             />
