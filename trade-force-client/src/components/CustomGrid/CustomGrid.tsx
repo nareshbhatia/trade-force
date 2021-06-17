@@ -99,22 +99,20 @@ export const CustomGrid = ({
 
     const gridOptions = {
         rowHeight: 36,
+        rowSelection: 'single',
         suppressCellSelection: true,
-        navigateToNextCell: handleKeyboardNavigation,
         rowModelType: 'infinite',
+        defaultColDef,
+        columnDefs,
         datasource,
+        navigateToNextCell: handleKeyboardNavigation,
+        onGridReady: handleGridReady,
+        onRowSelected,
     };
 
     return (
         <div className={classNames('ag-theme-alpine-dark', classes.grid)}>
-            <AgGridReact
-                rowSelection="single"
-                defaultColDef={defaultColDef}
-                columnDefs={columnDefs}
-                gridOptions={gridOptions}
-                onGridReady={handleGridReady}
-                onRowSelected={onRowSelected}
-            />
+            <AgGridReact gridOptions={gridOptions} />
         </div>
     );
 };
