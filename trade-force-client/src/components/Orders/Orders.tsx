@@ -20,7 +20,7 @@ import { useUiState, useUiStateSetter } from '../../contexts';
 import { useSecurities, useUsers } from '../../hooks';
 import { CustomGrid } from '../CustomGrid';
 import { PanelHeader } from '../PanelHeader';
-import { getDatasource } from './getDatasource';
+import { orderDatasource } from './orderDatasource';
 
 const useStyles = makeStyles((theme: Theme) => ({
     panelHeader: {
@@ -291,7 +291,7 @@ export const Orders = () => {
             <PanelHeader className={classes.panelHeader}>Orders</PanelHeader>
             <CustomGrid
                 columnDefs={columnDefs}
-                datasource={getDatasource()}
+                datasource={orderDatasource}
                 onRowSelected={handleRowSelected}
             />
         </VerticalContainer>
