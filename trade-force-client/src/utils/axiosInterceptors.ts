@@ -26,7 +26,7 @@ axios.interceptors.request.use(async (config) => {
     config.baseURL = baseURL;
 
     // add userId header
-    if (tfUserId !== undefined) {
+    if (tfUserId !== undefined && config.headers !== undefined) {
         config.headers[USER_ID_HEADER] = tfUserId;
     }
 
